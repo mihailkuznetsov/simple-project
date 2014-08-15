@@ -6,7 +6,7 @@
 <web-app>
 
   <welcome-file-list>
-    <welcome-file>TestUiBinder.html</welcome-file>
+    <welcome-file>UserDisplay.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

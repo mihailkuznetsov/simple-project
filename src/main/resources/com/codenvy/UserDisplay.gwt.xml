@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to='TestUiBinder'>
+<module rename-to='UserDisplay'>
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User' />
 
@@ -10,20 +10,21 @@
   <!-- Inherit the default GWT style sheet.  You can change       -->
   <!-- the theme of your GWT application by uncommenting          -->
   <!-- any one of the following lines.                            -->
-  <inherits name='com.google.gwt.user.theme.standard.Standard' />
-  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+  <!--<inherits name='com.google.gwt.user.theme.standard.Standard' />-->
+   <inherits name='com.google.gwt.user.theme.chrome.Chrome'/>
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='com.codenvy.client.TestUiBinder' />
+  <entry-point class='com.codenvy.client.UserDisplay' />
 
   <!-- Enable Super Dev Mode support.                             -->
   <add-linker name='xsiframe'/>
   <set-configuration-property name='devModeRedirectEnabled' value='true'/>
+
   <!-- Enable SourceMaps support.                                 -->
   <set-property name='compiler.useSourceMaps' value='true'/>
 
-    <!-- Specify the paths for translatable code                    -->
+    <!-- Specify the paths for translatable code                  -->
   <source path='client' />
 
 </module>

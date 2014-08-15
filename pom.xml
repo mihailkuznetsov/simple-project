@@ -7,7 +7,7 @@
   <!-- POM file generated with GWT webAppCreator -->
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.codenvy</groupId>
-  <artifactId>uitest</artifactId>
+  <artifactId>simple-project</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>GWT Maven Archetype</name>
@@ -78,7 +78,7 @@
         <!-- Plugin configuration. There are many available options, see 
           gwt-maven-plugin documentation at codehaus.org -->
         <configuration>
-          <runTarget>TestUiBinder.html</runTarget>
+          <runTarget>UserDisplay.html</runTarget>
           <hostedWebapp>${webappDirectory}</hostedWebapp>
           <i18nMessagesBundle>com.codenvy.client.Messages</i18nMessagesBundle>
         </configuration>

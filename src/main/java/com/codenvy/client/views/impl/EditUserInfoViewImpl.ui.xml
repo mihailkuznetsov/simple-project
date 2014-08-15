@@ -1,0 +1,53 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <ui:style>
+        @external .gwt-DialogBox .Caption;
+        .gwt-DialogBox .Caption {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .buttonPanel{
+            text-align: right;
+        }
+        .button {
+            margin: 10px;
+            width: 60px;
+            height: 25px;
+            display: inline;
+        }
+
+        .textBox {
+            margin: 5px;
+            width : 100px;
+            float: left;
+        }
+
+        .label {
+            margin: 5px;
+            width: 100px;
+            float: left;
+        }
+
+    </ui:style>
+        <g:FlowPanel width="230px" height="180px">
+            <g:Label text="First Name" ui:field="nameLabel" addStyleNames="{style.label}"/>
+            <g:TextBox ui:field="firstName" addStyleNames="{style.textBox}"/>
+
+            <g:Label text="Last Name" addStyleNames="{style.label}"/>
+            <g:TextBox ui:field="lastName" addStyleNames="{style.textBox}"/>
+
+            <g:Label text="Age" addStyleNames="{style.label}"/>
+            <g:TextBox ui:field="age" addStyleNames="{style.textBox}"/>
+
+            <g:Label text="Address" addStyleNames="{style.label}"/>
+            <g:TextBox ui:field="address" addStyleNames="{style.textBox}"/>
+
+            <g:FlowPanel addStyleNames="{style.buttonPanel}">
+                <g:Button text="Ok" ui:field="okButton" addStyleNames="{style.button}"/>
+                <g:Button text="Cancel" ui:field="cancelButton" addStyleNames="{style.button}"/>
+            </g:FlowPanel>
+
+        </g:FlowPanel>
+</ui:UiBinder>
