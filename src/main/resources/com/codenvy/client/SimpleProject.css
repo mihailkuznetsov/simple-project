@@ -1,0 +1,15 @@
+.buttonPanel {
+    width: 150px;
+    margin: 40px;
+}
+.table {
+    margin: 40px 100px;
+}
+.button {
+    width: 120px;
+    height: 30px;
+    margin: 5px;
+}
+.image {
+    margin: 50px;
+}

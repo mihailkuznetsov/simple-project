@@ -8,10 +8,11 @@
         }
 
         .buttonPanel{
+            margin-right: 8px;
             text-align: right;
         }
         .button {
-            margin: 10px;
+            margin: 5px 2px;
             width: 60px;
             height: 25px;
             display: inline;
@@ -30,6 +31,7 @@
         }
 
     </ui:style>
+
         <g:FlowPanel width="230px" height="180px">
             <g:Label text="First Name" addStyleNames="{style.label}"/>
             <g:TextBox ui:field="firstName" addStyleNames="{style.textBox}"/>

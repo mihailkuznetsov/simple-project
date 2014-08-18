@@ -1,7 +1,7 @@
 package com.codenvy.client.views.impl;
 
 import com.codenvy.client.User;
-import com.codenvy.client.presenter.MainPresenter;
+import com.codenvy.client.presenters.MainPresenter;
 import com.codenvy.client.views.MainView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,7 +17,6 @@ import java.util.List;
 
 
 public class MainViewImpl extends Composite implements MainView {
-
     interface MyViewImplUiBinder extends UiBinder<DockLayoutPanel, MainViewImpl> {
     }
 
@@ -30,6 +29,12 @@ public class MainViewImpl extends Composite implements MainView {
     @UiField Button deleteButton;
 
     @UiField(provided = true) CellTable<User> table;
+
+    @UiField Button englishButton;
+
+    @UiField Button russianButton;
+
+    @UiField Label info;
 
     private MainPresenter presenter;
 
@@ -83,6 +88,10 @@ public class MainViewImpl extends Composite implements MainView {
         });
     }
 
+    public void setInfoText(String text) {
+        info.setText(text);
+    }
+
     public void setPresenter(MainPresenter presenter) {
         this.presenter = presenter;
     }
@@ -114,5 +123,13 @@ public class MainViewImpl extends Composite implements MainView {
             presenter.onDeleteButtonClicked();
     }
 
+    @UiHandler("englishButton")
+    public void onEnglishButtonClicked(ClickEvent event) {
+        presenter.onEnglishButtonClicked();
+    }
 
+    @UiHandler("russianButton")
+    public void onRussianButtonClicked(ClickEvent event) {
+        presenter.onRussianButtonClicked();
+    }
 }

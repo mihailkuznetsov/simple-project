@@ -24,7 +24,10 @@
   <!-- Enable SourceMaps support.                                 -->
   <set-property name='compiler.useSourceMaps' value='true'/>
 
-    <!-- Specify the paths for translatable code                  -->
+  <!--Set RU Locale support                                       -->
+  <!--<extend-property name='locale' values='ru'/>-->
+
+  <!-- Specify the paths for translatable code                  -->
   <source path='client' />
 
 </module>

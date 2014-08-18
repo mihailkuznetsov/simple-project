@@ -1,6 +1,6 @@
 package com.codenvy.client.views.impl;
 
-import com.codenvy.client.presenter.UserEditDialogPresenter;
+import com.codenvy.client.presenters.UserEditDialogPresenter;
 import com.codenvy.client.views.UserEditDialogView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -41,31 +41,27 @@ public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogV
         this.setGlassEnabled(true);
     }
 
-    public String getFirstName() {
-        return firstName.getText();
+    public TextBox getFirstName() {
+        return firstName;
     }
 
-    public String getLastName() {
-        return lastName.getText();
+    public TextBox getLastName() {
+        return lastName;
     }
 
-    public String getAge() {
-        return age.getText();
+    public TextBox getAge() {
+        return age;
     }
 
-    public String getAddress() {
-        return address.getText();
+    public TextBox getAddress() {
+        return address;
     }
 
-    public void showDialog(String dialogTitle, String firstName, String lastName, String age, String address) {
-
+    public void setDialogTitle(String dialogTitle) {
         this.setText(dialogTitle);
+    }
 
-        this.firstName.setText(firstName);
-        this.lastName.setText(lastName);
-        this.age.setText(age);
-        this.address.setText(address);
-
+    public void showDialog() {
         this.center();
         this.show();
 
