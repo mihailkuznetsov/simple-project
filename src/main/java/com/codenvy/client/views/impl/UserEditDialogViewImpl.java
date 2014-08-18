@@ -1,7 +1,7 @@
 package com.codenvy.client.views.impl;
 
-import com.codenvy.client.presenter.EditUserInfoPresenter;
-import com.codenvy.client.views.EditUserInfoView;
+import com.codenvy.client.presenter.UserEditDialogPresenter;
+import com.codenvy.client.views.UserEditDialogView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -9,13 +9,13 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.*;
 
-public class EditUserInfoViewImpl extends DialogBox implements EditUserInfoView{
-    interface EditUserInfoViewUiBinder extends UiBinder<Widget, EditUserInfoViewImpl> {
+public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogView {
+    interface EditUserInfoViewUiBinder extends UiBinder<Widget, UserEditDialogViewImpl> {
     }
 
     private static EditUserInfoViewUiBinder ourUiBinder = GWT.create(EditUserInfoViewUiBinder.class);
 
-    private EditUserInfoPresenter presenter;
+    private UserEditDialogPresenter presenter;
 
     @UiField
     TextBox firstName;
@@ -35,10 +35,7 @@ public class EditUserInfoViewImpl extends DialogBox implements EditUserInfoView{
     @UiField
     Button cancelButton;
 
-    @UiField
-    Label nameLabel;
-
-    public EditUserInfoViewImpl() {
+    public UserEditDialogViewImpl() {
         setWidget(ourUiBinder.createAndBindUi(this));
         this.setAnimationEnabled(true);
         this.setGlassEnabled(true);
@@ -75,8 +72,7 @@ public class EditUserInfoViewImpl extends DialogBox implements EditUserInfoView{
         this.firstName.setFocus(true);
     }
 
-
-    public void setPresenter(EditUserInfoPresenter presenter) {
+    public void setPresenter(UserEditDialogPresenter presenter) {
         this.presenter = presenter;
     }
 

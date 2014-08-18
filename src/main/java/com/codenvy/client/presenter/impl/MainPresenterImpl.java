@@ -1,29 +1,31 @@
 package com.codenvy.client.presenter.impl;
 
 import com.codenvy.client.User;
-import com.codenvy.client.presenter.EditUserInfoPresenter;
-import com.codenvy.client.presenter.UserDisplayPresenter;
-import com.codenvy.client.views.UserDisplayView;
+import com.codenvy.client.presenter.UserEditDialogPresenter;
+import com.codenvy.client.presenter.MainPresenter;
+import com.codenvy.client.views.MainView;
 import com.google.gwt.user.client.ui.HasWidgets;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDisplayPresenterImpl implements UserDisplayPresenter {
+public class MainPresenterImpl implements MainPresenter {
 
-    private final UserDisplayView view;
+    private final MainView view;
 
-    private final EditUserInfoPresenter dialogPresenter;
+    private final UserEditDialogPresenter dialogPresenter;
 
     private final List<User> users;
 
     private User lastSelectedUser;
 
-    public UserDisplayPresenterImpl(UserDisplayView view, EditUserInfoPresenter editUserInfoPresenter){
+    public MainPresenterImpl(MainView view, UserEditDialogPresenter userEditDialogPresenter){
         this.view = view;
         this.view.setPresenter(this);
+
+        this.dialogPresenter = userEditDialogPresenter;
+
         this.users = new ArrayList<User>();
-        this.dialogPresenter = editUserInfoPresenter;
     }
 
     public void onAddButtonClicked() {
@@ -42,6 +44,7 @@ public class UserDisplayPresenterImpl implements UserDisplayPresenter {
         dialogPresenter.showDialog(lastSelectedUser, new CallBack() {
             public void onUserChanged(User user) {
                 users.set(users.indexOf(lastSelectedUser), user);
+
                 view.setUsers(users);
 
                 view.setEditButtonEnabled(false);
@@ -62,9 +65,6 @@ public class UserDisplayPresenterImpl implements UserDisplayPresenter {
     public void onUserSelected(User lastSelectedUser) {
         view.setEditButtonEnabled(true);
         view.setDeleteButtonEnabled(true);
-
-
-
 
         this.lastSelectedUser = lastSelectedUser;
     }

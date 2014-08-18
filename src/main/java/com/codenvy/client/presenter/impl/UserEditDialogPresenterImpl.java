@@ -1,17 +1,17 @@
 package com.codenvy.client.presenter.impl;
 
 import com.codenvy.client.User;
-import com.codenvy.client.presenter.EditUserInfoPresenter;
-import com.codenvy.client.views.EditUserInfoView;
+import com.codenvy.client.presenter.UserEditDialogPresenter;
+import com.codenvy.client.views.UserEditDialogView;
 import com.google.gwt.user.client.Window;
 
-public class EditUserInfoPresenterImpl implements EditUserInfoPresenter {
+public class UserEditDialogPresenterImpl implements UserEditDialogPresenter {
 
-    private final EditUserInfoView view;
+    private final UserEditDialogView view;
 
-    private UserDisplayPresenterImpl.CallBack callBack;
+    private MainPresenterImpl.CallBack callBack;
 
-    public EditUserInfoPresenterImpl(EditUserInfoView view) {
+    public UserEditDialogPresenterImpl(UserEditDialogView view) {
         this.view = view;
         this.view.setPresenter(this);
     }
@@ -37,7 +37,7 @@ public class EditUserInfoPresenterImpl implements EditUserInfoPresenter {
         view.closeDialogBox();
     }
 
-    public void showDialog(User user, UserDisplayPresenterImpl.CallBack callBack) {
+    public void showDialog(User user, MainPresenterImpl.CallBack callBack) {
         if (user==null) {
             view.showDialog("Add a new user:", "", "", "", "");
         } else {

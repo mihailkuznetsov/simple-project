@@ -1,8 +1,8 @@
 package com.codenvy.client.views.impl;
 
 import com.codenvy.client.User;
-import com.codenvy.client.presenter.UserDisplayPresenter;
-import com.codenvy.client.views.UserDisplayView;
+import com.codenvy.client.presenter.MainPresenter;
+import com.codenvy.client.views.MainView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -12,14 +12,13 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.view.client.*;
-import com.google.gwt.view.client.SingleSelectionModel;
 
 import java.util.List;
 
 
-public class UserDisplayViewImpl extends Composite implements UserDisplayView {
+public class MainViewImpl extends Composite implements MainView {
 
-    interface MyViewImplUiBinder extends UiBinder<DockLayoutPanel, UserDisplayViewImpl> {
+    interface MyViewImplUiBinder extends UiBinder<DockLayoutPanel, MainViewImpl> {
     }
 
     private static MyViewImplUiBinder ourUiBinder = GWT.create(MyViewImplUiBinder.class);
@@ -32,35 +31,40 @@ public class UserDisplayViewImpl extends Composite implements UserDisplayView {
 
     @UiField(provided = true) CellTable<User> table;
 
-    private UserDisplayPresenter presenter;
+    private MainPresenter presenter;
 
-    public UserDisplayViewImpl() {
-        table = new CellTable<User>();
-        initCellTable();
+    public MainViewImpl() {
+        this.initCellTable();
         initWidget(ourUiBinder.createAndBindUi(this));
+
         editButton.setEnabled(false);
         deleteButton.setEnabled(false);
     }
 
     private void initCellTable() {
+        table = new CellTable<User>();
+
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getFirstName();
             }
         }, "First Name");
+
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getLastName();
             }
         }, "Last Name");
+
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getAge();
             }
         }, "Age");
+
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
@@ -79,7 +83,7 @@ public class UserDisplayViewImpl extends Composite implements UserDisplayView {
         });
     }
 
-    public void setPresenter(UserDisplayPresenter presenter) {
+    public void setPresenter(MainPresenter presenter) {
         this.presenter = presenter;
     }
 

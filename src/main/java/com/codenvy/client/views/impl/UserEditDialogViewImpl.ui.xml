@@ -1,6 +1,5 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
-
     <ui:style>
         @external .gwt-DialogBox .Caption;
         .gwt-DialogBox .Caption {
@@ -32,7 +31,7 @@
 
     </ui:style>
         <g:FlowPanel width="230px" height="180px">
-            <g:Label text="First Name" ui:field="nameLabel" addStyleNames="{style.label}"/>
+            <g:Label text="First Name" addStyleNames="{style.label}"/>
             <g:TextBox ui:field="firstName" addStyleNames="{style.textBox}"/>
 
             <g:Label text="Last Name" addStyleNames="{style.label}"/>

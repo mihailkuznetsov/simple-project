@@ -10,9 +10,6 @@ public class User {
 
     private String address;
 
-    public User() {
-    }
-
     public User(String firstName, String lastName, String age, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,9 +31,5 @@ public class User {
 
     public String getAddress() {
         return address;
-    }
-
-    public String getFullInfo() {
-        return firstName + " " + lastName + ", age: " + age + " , address: " + address;
     }
 }

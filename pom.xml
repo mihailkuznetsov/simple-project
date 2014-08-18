@@ -78,7 +78,7 @@
         <!-- Plugin configuration. There are many available options, see 
           gwt-maven-plugin documentation at codehaus.org -->
         <configuration>
-          <runTarget>UserDisplay.html</runTarget>
+          <runTarget>SimpleProject.html</runTarget>
           <hostedWebapp>${webappDirectory}</hostedWebapp>
           <i18nMessagesBundle>com.codenvy.client.Messages</i18nMessagesBundle>
         </configuration>
