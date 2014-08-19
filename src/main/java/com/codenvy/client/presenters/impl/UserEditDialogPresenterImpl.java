@@ -1,6 +1,6 @@
 package com.codenvy.client.presenters.impl;
 
-import com.codenvy.client.SimpleProjectConstants;
+import com.codenvy.client.SimpleProjectMessages;
 import com.codenvy.client.User;
 import com.codenvy.client.presenters.UserEditDialogPresenter;
 import com.codenvy.client.views.UserEditDialogView;
@@ -23,7 +23,7 @@ public class UserEditDialogPresenterImpl implements UserEditDialogPresenter {
         String address = view.getAddress();
 
         if (firstName.isEmpty() || (lastName.isEmpty()) || (age.isEmpty()) || address.isEmpty()) {
-            Window.alert("User cannot contain empty fields");
+            Window.alert(SimpleProjectMessages.IMPL.emptyUserDataErrorMessage());
         } else {
             callBack.onUserChanged(new User(firstName, lastName,
                     age, address));
@@ -39,13 +39,13 @@ public class UserEditDialogPresenterImpl implements UserEditDialogPresenter {
         this.callBack = callBack;
 
         if (user==null) {
-            view.setDialogTitle(SimpleProjectConstants.IMPL.addDialogTitle());
+            view.setDialogTitle(SimpleProjectMessages.IMPL.addDialogTitle());
             view.setFirstName("");
             view.setLastName("");
             view.setAge("");
             view.setAddress("");
         } else {
-            view.setDialogTitle(SimpleProjectConstants.IMPL.editDialogTitle());
+            view.setDialogTitle(SimpleProjectMessages.IMPL.editDialogTitle());
             view.setFirstName(user.getFirstName());
             view.setFirstName(user.getLastName());
             view.setFirstName(user.getAge());

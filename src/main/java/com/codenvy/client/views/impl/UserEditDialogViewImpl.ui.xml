@@ -1,7 +1,7 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
-    <ui:with field="cst" type="com.codenvy.client.SimpleProjectConstants"/>
+    <ui:with field="msg" type="com.codenvy.client.SimpleProjectMessages"/>
 
     <ui:style>
         @external .gwt-DialogBox .Caption;
@@ -36,21 +36,21 @@
     </ui:style>
 
         <g:FlowPanel width="230px" height="180px">
-            <g:Label text="{cst.firstName}" addStyleNames="{style.label}"/>
+            <g:Label text="{msg.firstName}" addStyleNames="{style.label}"/>
             <g:TextBox ui:field="firstName" addStyleNames="{style.textBox}"/>
 
-            <g:Label text="{cst.lastName}" addStyleNames="{style.label}"/>
+            <g:Label text="{msg.lastName}" addStyleNames="{style.label}"/>
             <g:TextBox ui:field="lastName" addStyleNames="{style.textBox}"/>
 
-            <g:Label text="{cst.age}" addStyleNames="{style.label}"/>
+            <g:Label text="{msg.age}" addStyleNames="{style.label}"/>
             <g:TextBox ui:field="age" addStyleNames="{style.textBox}"/>
 
-            <g:Label text="{cst.address}" addStyleNames="{style.label}"/>
+            <g:Label text="{msg.address}" addStyleNames="{style.label}"/>
             <g:TextBox ui:field="address" addStyleNames="{style.textBox}"/>
 
             <g:FlowPanel addStyleNames="{style.buttonPanel}">
-                <g:Button text="{cst.ok}" ui:field="okButton" addStyleNames="{style.button}"/>
-                <g:Button text="{cst.cancel}" ui:field="cancelButton" addStyleNames="{style.button}"/>
+                <g:Button text="{msg.ok}" ui:field="okButton" addStyleNames="{style.button}"/>
+                <g:Button text="{msg.cancel}" ui:field="cancelButton" addStyleNames="{style.button}"/>
             </g:FlowPanel>
 
         </g:FlowPanel>

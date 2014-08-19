@@ -14,7 +14,7 @@ public interface MainView extends IsWidget{
 
     void setUsers(List<User> users);
 
-    void setUserCount(int userCount);
+    void setUserAmountLabel(String text);
 
     void setEditButtonEnabled(boolean enabled);
 

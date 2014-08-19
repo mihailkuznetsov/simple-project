@@ -80,7 +80,6 @@ public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogV
     public void showDialog() {
         this.center();
         this.show();
-
         this.firstName.setFocus(true);
     }
 

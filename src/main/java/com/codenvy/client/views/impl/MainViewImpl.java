@@ -1,6 +1,5 @@
 package com.codenvy.client.views.impl;
 
-import com.codenvy.client.SimpleProjectConstants;
 import com.codenvy.client.SimpleProjectMessages;
 import com.codenvy.client.User;
 import com.codenvy.client.presenters.MainPresenter;
@@ -38,7 +37,7 @@ public class MainViewImpl extends Composite implements MainView {
 
     @UiField Label info;
 
-    @UiField Label userCount;
+    @UiField Label userAmountLabel;
 
     private MainPresenter presenter;
 
@@ -48,43 +47,41 @@ public class MainViewImpl extends Composite implements MainView {
 
         editButton.setEnabled(false);
         deleteButton.setEnabled(false);
-        setUserCount(0);
+        userAmountLabel.setText(SimpleProjectMessages.IMPL.userAmount(0));
     }
 
     private void initCellTable() {
         table = new CellTable<User>();
-
-        SimpleProjectConstants constants = SimpleProjectConstants.IMPL;
 
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getFirstName();
             }
-        }, constants.firstName());
+        }, SimpleProjectMessages.IMPL.firstName());
 
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getLastName();
             }
-        }, constants.lastName());
+        }, SimpleProjectMessages.IMPL.lastName());
 
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getAge();
             }
-        }, constants.age());
+        }, SimpleProjectMessages.IMPL.age());
 
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getAddress();
             }
-        }, constants.address());
+        }, SimpleProjectMessages.IMPL.address());
 
-        table.setLoadingIndicator(new Label(constants.emptyTableIndicator()));
+        table.setLoadingIndicator(new Label(SimpleProjectMessages.IMPL.emptyTableIndicator()));
 
         final NoSelectionModel<User> smodel = new NoSelectionModel<User>();
         table.setSelectionModel(smodel);
@@ -107,8 +104,8 @@ public class MainViewImpl extends Composite implements MainView {
         table.setRowData(users);
     }
 
-    public void setUserCount(int userCount) {
-        this.userCount.setText(SimpleProjectMessages.IMPL.userCount(userCount));
+    public void setUserAmountLabel(String text) {
+        this.userAmountLabel.setText(text);
     }
 
     public void setEditButtonEnabled(boolean enabled) {

@@ -11,5 +11,5 @@ public interface MainResource extends CssResource {
 
     String image();
 
-    String localeLabel();
+    String userAmountLabel();
 }

@@ -1,6 +1,7 @@
 package com.codenvy.client.presenters.impl;
 
 import com.codenvy.client.ResourceBundle;
+import com.codenvy.client.SimpleProjectMessages;
 import com.codenvy.client.User;
 import com.codenvy.client.events.ChangeToEnglishEvent;
 import com.codenvy.client.events.ChangeToEnglishEventHandler;
@@ -54,7 +55,7 @@ public class MainPresenterImpl implements MainPresenter {
             public void onUserChanged(User user) {
                 users.add(user);
                 view.setUsers(users);
-                view.setUserCount(users.size());
+                view.setUserAmountLabel(SimpleProjectMessages.IMPL.userAmount(users.size()));
                 view.setEditButtonEnabled(false);
                 view.setDeleteButtonEnabled(false);
             }
@@ -82,7 +83,7 @@ public class MainPresenterImpl implements MainPresenter {
     public void onDeleteButtonClicked() {
         users.remove(lastSelectedUser);
         view.setUsers(users);
-        view.setUserCount(users.size());
+        view.setUserAmountLabel(SimpleProjectMessages.IMPL.userAmount(users.size()));
         view.setEditButtonEnabled(false);
         view.setDeleteButtonEnabled(false);
     }
