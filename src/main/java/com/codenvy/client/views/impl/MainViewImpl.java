@@ -1,5 +1,7 @@
 package com.codenvy.client.views.impl;
 
+import com.codenvy.client.SimpleProjectConstants;
+import com.codenvy.client.SimpleProjectMessages;
 import com.codenvy.client.User;
 import com.codenvy.client.presenters.MainPresenter;
 import com.codenvy.client.views.MainView;
@@ -36,6 +38,8 @@ public class MainViewImpl extends Composite implements MainView {
 
     @UiField Label info;
 
+    @UiField Label userCount;
+
     private MainPresenter presenter;
 
     public MainViewImpl() {
@@ -44,40 +48,43 @@ public class MainViewImpl extends Composite implements MainView {
 
         editButton.setEnabled(false);
         deleteButton.setEnabled(false);
+        setUserCount(0);
     }
 
     private void initCellTable() {
         table = new CellTable<User>();
+
+        SimpleProjectConstants constants = SimpleProjectConstants.IMPL;
 
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getFirstName();
             }
-        }, "First Name");
+        }, constants.firstName());
 
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getLastName();
             }
-        }, "Last Name");
+        }, constants.lastName());
 
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getAge();
             }
-        }, "Age");
+        }, constants.age());
 
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getAddress();
             }
-        }, "Address");
+        }, constants.address());
 
-        table.setLoadingIndicator(new Label("The table is empty"));
+        table.setLoadingIndicator(new Label(constants.emptyTableIndicator()));
 
         final NoSelectionModel<User> smodel = new NoSelectionModel<User>();
         table.setSelectionModel(smodel);
@@ -98,6 +105,10 @@ public class MainViewImpl extends Composite implements MainView {
 
     public void setUsers(List<User> users) {
         table.setRowData(users);
+    }
+
+    public void setUserCount(int userCount) {
+        this.userCount.setText(SimpleProjectMessages.IMPL.userCount(userCount));
     }
 
     public void setEditButtonEnabled(boolean enabled) {

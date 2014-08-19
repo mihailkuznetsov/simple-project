@@ -1,5 +1,6 @@
 package com.codenvy.client.presenters.impl;
 
+import com.codenvy.client.SimpleProjectConstants;
 import com.codenvy.client.User;
 import com.codenvy.client.presenters.UserEditDialogPresenter;
 import com.codenvy.client.views.UserEditDialogView;
@@ -16,10 +17,10 @@ public class UserEditDialogPresenterImpl implements UserEditDialogPresenter {
     }
 
     public void onOkButtonClicked() {
-        String firstName = view.getFirstName().getText();
-        String lastName = view.getLastName().getText();
-        String age = view.getAge().getText();
-        String address = view.getAddress().getText();
+        String firstName = view.getFirstName();
+        String lastName = view.getLastName();
+        String age = view.getAge();
+        String address = view.getAddress();
 
         if (firstName.isEmpty() || (lastName.isEmpty()) || (age.isEmpty()) || address.isEmpty()) {
             Window.alert("User cannot contain empty fields");
@@ -38,17 +39,17 @@ public class UserEditDialogPresenterImpl implements UserEditDialogPresenter {
         this.callBack = callBack;
 
         if (user==null) {
-            view.setDialogTitle("Add a new user:");
-            view.getFirstName().setText("");
-            view.getLastName().setText("");
-            view.getAge().setText("");
-            view.getAddress().setText("");
+            view.setDialogTitle(SimpleProjectConstants.IMPL.addDialogTitle());
+            view.setFirstName("");
+            view.setLastName("");
+            view.setAge("");
+            view.setAddress("");
         } else {
-            view.setDialogTitle("Edit current user:");
-            view.getFirstName().setText(user.getFirstName());
-            view.getLastName().setText(user.getLastName());
-            view.getAge().setText(user.getAge());
-            view.getAddress().setText(user.getAddress());
+            view.setDialogTitle(SimpleProjectConstants.IMPL.editDialogTitle());
+            view.setFirstName(user.getFirstName());
+            view.setFirstName(user.getLastName());
+            view.setFirstName(user.getAge());
+            view.setFirstName(user.getAddress());
         }
         view.showDialog();
     }

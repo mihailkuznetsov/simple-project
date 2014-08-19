@@ -13,3 +13,9 @@
 .image {
     margin: 50px;
 }
+.localeLabel {
+    font-size: 18px;
+    width: 220px;
+    margin: 20px;
+    background-color: ghostwhite;
+}

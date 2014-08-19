@@ -2,16 +2,23 @@ package com.codenvy.client.views;
 
 import com.codenvy.client.presenters.UserEditDialogPresenter;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.TextBox;
 
 public interface UserEditDialogView extends IsWidget{
-    TextBox getFirstName();
+    String getFirstName();
 
-    TextBox getLastName();
+    String getLastName();
 
-    TextBox getAge();
+    String getAge();
 
-    TextBox getAddress();
+    String getAddress();
+
+    void setFirstName(String firstName);
+
+    void setLastName(String lastName);
+
+    void setAge(String age);
+
+    void setAddress(String address);
 
     void setDialogTitle(String dialogTitle);
 

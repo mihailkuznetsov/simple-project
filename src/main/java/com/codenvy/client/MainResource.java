@@ -10,4 +10,6 @@ public interface MainResource extends CssResource {
     String button();
 
     String image();
+
+    String localeLabel();
 }

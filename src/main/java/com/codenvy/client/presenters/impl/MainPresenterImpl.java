@@ -9,11 +9,8 @@ import com.codenvy.client.events.ChangeToRussianEventHandler;
 import com.codenvy.client.presenters.UserEditDialogPresenter;
 import com.codenvy.client.presenters.MainPresenter;
 import com.codenvy.client.views.MainView;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.ImageBundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +54,7 @@ public class MainPresenterImpl implements MainPresenter {
             public void onUserChanged(User user) {
                 users.add(user);
                 view.setUsers(users);
-
+                view.setUserCount(users.size());
                 view.setEditButtonEnabled(false);
                 view.setDeleteButtonEnabled(false);
             }
@@ -85,7 +82,7 @@ public class MainPresenterImpl implements MainPresenter {
     public void onDeleteButtonClicked() {
         users.remove(lastSelectedUser);
         view.setUsers(users);
-
+        view.setUserCount(users.size());
         view.setEditButtonEnabled(false);
         view.setDeleteButtonEnabled(false);
     }

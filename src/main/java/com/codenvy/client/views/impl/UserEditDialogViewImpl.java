@@ -41,20 +41,36 @@ public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogV
         this.setGlassEnabled(true);
     }
 
-    public TextBox getFirstName() {
-        return firstName;
+    public String getFirstName() {
+        return firstName.getText();
     }
 
-    public TextBox getLastName() {
-        return lastName;
+    public String getLastName() {
+        return lastName.getText();
     }
 
-    public TextBox getAge() {
-        return age;
+    public String getAge() {
+        return age.getText();
     }
 
-    public TextBox getAddress() {
-        return address;
+    public String  getAddress() {
+        return address.getText();
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName.setText(firstName);
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName.setText(lastName);
+    }
+
+    public void setAge(String age) {
+        this.age.setText(age);
+    }
+
+    public void setAddress(String address) {
+        this.address.setText(address);
     }
 
     public void setDialogTitle(String dialogTitle) {
