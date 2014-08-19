@@ -4,12 +4,14 @@ import com.codenvy.client.SimpleProjectMessages;
 import com.codenvy.client.User;
 import com.codenvy.client.main.MainPresenter;
 import com.google.gwt.user.client.Window;
+import com.google.inject.Inject;
 
 public class UserEditDialogPresenter implements UserEditDialogView.ActionDelegate {
     private final UserEditDialogView view;
 
     private MainPresenter.CallBack callBack;
 
+    @Inject
     public UserEditDialogPresenter(UserEditDialogView view) {
         this.view = view;
         this.view.setDelegate(this);

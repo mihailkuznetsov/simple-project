@@ -10,6 +10,7 @@ import com.codenvy.client.events.ChangeToRussianEvent;
 import com.codenvy.client.events.ChangeToRussianEventHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class MainPresenter implements MainView.ActionDelegate {
 
     private final CallBack editCallBack;
 
+    @Inject
     public MainPresenter(MainView mainView, UserEditDialogPresenter userEditDialogPresenter, EventBus eventBus){
         this.view = mainView;
         this.view.setDelegate(this);

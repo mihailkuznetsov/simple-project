@@ -40,11 +40,8 @@ public class MainViewImpl extends Composite implements MainView {
     private ActionDelegate delegate;
 
     public MainViewImpl() {
-        this.initCellTable();
+        initCellTable();
         initWidget(ourUiBinder.createAndBindUi(this));
-
-        editButton.setEnabled(false);
-        deleteButton.setEnabled(false);
         userAmountLabel.setText(SimpleProjectMessages.IMPL.userAmount(0));
     }
 

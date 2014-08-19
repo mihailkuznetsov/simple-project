@@ -19,8 +19,8 @@
         <g:east size="20">
             <g:FlowPanel addStyleNames="{res.css.buttonPanel} ">
                 <g:Button ui:field="addButton" text="{msg.add}" addStyleNames="{res.css.button}"/>
-                <g:Button ui:field="editButton" text="{msg.edit}" addStyleNames="{res.css.button}"/>
-                <g:Button ui:field="deleteButton" text="{msg.delete}" addStyleNames="{res.css.button}"/>
+                <g:Button ui:field="editButton" text="{msg.edit}" addStyleNames="{res.css.button}" enabled="false"/>
+                <g:Button ui:field="deleteButton" text="{msg.delete}" addStyleNames="{res.css.button}" enabled="false"/>
             </g:FlowPanel>
         </g:east>
 
