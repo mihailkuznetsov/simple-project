@@ -1,9 +1,7 @@
-package com.codenvy.client.views.impl;
+package com.codenvy.client.main;
 
 import com.codenvy.client.SimpleProjectMessages;
 import com.codenvy.client.User;
-import com.codenvy.client.presenters.MainPresenter;
-import com.codenvy.client.views.MainView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -39,7 +37,7 @@ public class MainViewImpl extends Composite implements MainView {
 
     @UiField Label userAmountLabel;
 
-    private MainPresenter presenter;
+    private ActionDelegate delegate;
 
     public MainViewImpl() {
         this.initCellTable();
@@ -87,18 +85,20 @@ public class MainViewImpl extends Composite implements MainView {
         table.setSelectionModel(smodel);
         smodel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
             public void onSelectionChange(SelectionChangeEvent selectionChangeEvent) {
-                presenter.onUserSelected(smodel.getLastSelectedObject());
+                delegate.onUserSelected(smodel.getLastSelectedObject());
             }
         });
+    }
+
+    public void setDelegate(ActionDelegate delegate) {
+        this.delegate = delegate;
     }
 
     public void setInfoText(String text) {
         info.setText(text);
     }
 
-    public void setPresenter(MainPresenter presenter) {
-        this.presenter = presenter;
-    }
+
 
     public void setUsers(List<User> users) {
         table.setRowData(users);
@@ -118,26 +118,26 @@ public class MainViewImpl extends Composite implements MainView {
 
     @UiHandler("addButton")
     public void onAddButtonClicked(ClickEvent event) {
-            presenter.onAddButtonClicked();
+        delegate.onAddButtonClicked();
     }
 
     @UiHandler("editButton")
     public void onEditButtonClicked(ClickEvent event) {
-            presenter.onEditButtonClicked();
+        delegate.onEditButtonClicked();
     }
 
     @UiHandler("deleteButton")
     public void onDeleteButtonClicked(ClickEvent event) {
-            presenter.onDeleteButtonClicked();
+        delegate.onDeleteButtonClicked();
     }
 
     @UiHandler("englishButton")
     public void onEnglishButtonClicked(ClickEvent event) {
-        presenter.onEnglishButtonClicked();
+        delegate.onEnglishButtonClicked();
     }
 
     @UiHandler("russianButton")
     public void onRussianButtonClicked(ClickEvent event) {
-        presenter.onRussianButtonClicked();
+        delegate.onRussianButtonClicked();
     }
 }

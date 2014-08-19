@@ -1,7 +1,5 @@
-package com.codenvy.client.views.impl;
+package com.codenvy.client.edit;
 
-import com.codenvy.client.presenters.UserEditDialogPresenter;
-import com.codenvy.client.views.UserEditDialogView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -15,7 +13,7 @@ public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogV
 
     private static EditUserInfoViewUiBinder ourUiBinder = GWT.create(EditUserInfoViewUiBinder.class);
 
-    private UserEditDialogPresenter presenter;
+    private ActionDelegate delegate;
 
     @UiField
     TextBox firstName;
@@ -39,6 +37,10 @@ public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogV
         setWidget(ourUiBinder.createAndBindUi(this));
         this.setAnimationEnabled(true);
         this.setGlassEnabled(true);
+    }
+
+    public void setDelegate(ActionDelegate delegate) {
+        this.delegate = delegate;
     }
 
     public String getFirstName() {
@@ -80,25 +82,25 @@ public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogV
     public void showDialog() {
         this.center();
         this.show();
-        this.firstName.setFocus(true);
-    }
 
-    public void setPresenter(UserEditDialogPresenter presenter) {
-        this.presenter = presenter;
     }
 
     public void closeDialogBox() {
         this.hide();
     }
 
+    public void setFocusOnFirstName() {
+        this.firstName.setFocus(true);
+    }
+
     @UiHandler("okButton")
     public void onOkButtonClicked(ClickEvent event) {
-        presenter.onOkButtonClicked();
+        delegate.onOkButtonClicked();
     }
 
     @UiHandler("cancelButton")
     public void onCancelButtonCLicked(ClickEvent event) {
-        presenter.onCancelButtonClicked();
+        delegate.onCancelButtonClicked();
     }
 
 }

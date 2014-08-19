@@ -1,9 +1,16 @@
-package com.codenvy.client.views;
+package com.codenvy.client.edit;
 
-import com.codenvy.client.presenters.UserEditDialogPresenter;
 import com.google.gwt.user.client.ui.IsWidget;
 
 public interface UserEditDialogView extends IsWidget{
+    public interface ActionDelegate {
+        void onOkButtonClicked();
+
+        void onCancelButtonClicked();
+    }
+
+    void setDelegate(ActionDelegate delegate);
+
     String getFirstName();
 
     String getLastName();
@@ -24,7 +31,7 @@ public interface UserEditDialogView extends IsWidget{
 
     void showDialog();
 
-    void setPresenter(UserEditDialogPresenter presenter);
-
     void closeDialogBox();
+
+    void setFocusOnFirstName();
 }

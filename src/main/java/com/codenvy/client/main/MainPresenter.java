@@ -1,22 +1,20 @@
-package com.codenvy.client.presenters.impl;
+package com.codenvy.client.main;
 
 import com.codenvy.client.ResourceBundle;
 import com.codenvy.client.SimpleProjectMessages;
 import com.codenvy.client.User;
+import com.codenvy.client.edit.UserEditDialogPresenter;
 import com.codenvy.client.events.ChangeToEnglishEvent;
 import com.codenvy.client.events.ChangeToEnglishEventHandler;
 import com.codenvy.client.events.ChangeToRussianEvent;
 import com.codenvy.client.events.ChangeToRussianEventHandler;
-import com.codenvy.client.presenters.UserEditDialogPresenter;
-import com.codenvy.client.presenters.MainPresenter;
-import com.codenvy.client.views.MainView;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.HasWidgets;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainPresenterImpl implements MainPresenter {
+public class MainPresenter implements MainView.ActionDelegate {
     private final MainView view;
 
     private final UserEditDialogPresenter dialogPresenter;
@@ -31,9 +29,9 @@ public class MainPresenterImpl implements MainPresenter {
 
     private final CallBack editCallBack;
 
-    public MainPresenterImpl(MainView mainView, UserEditDialogPresenter userEditDialogPresenter, EventBus eventBus){
+    public MainPresenter(MainView mainView, UserEditDialogPresenter userEditDialogPresenter, EventBus eventBus){
         this.view = mainView;
-        this.view.setPresenter(this);
+        this.view.setDelegate(this);
 
         this.dialogPresenter = userEditDialogPresenter;
 

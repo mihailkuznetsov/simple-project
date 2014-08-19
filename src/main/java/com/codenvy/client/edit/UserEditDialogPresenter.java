@@ -1,19 +1,18 @@
-package com.codenvy.client.presenters.impl;
+package com.codenvy.client.edit;
 
 import com.codenvy.client.SimpleProjectMessages;
 import com.codenvy.client.User;
-import com.codenvy.client.presenters.UserEditDialogPresenter;
-import com.codenvy.client.views.UserEditDialogView;
+import com.codenvy.client.main.MainPresenter;
 import com.google.gwt.user.client.Window;
 
-public class UserEditDialogPresenterImpl implements UserEditDialogPresenter {
+public class UserEditDialogPresenter implements UserEditDialogView.ActionDelegate {
     private final UserEditDialogView view;
 
-    private MainPresenterImpl.CallBack callBack;
+    private MainPresenter.CallBack callBack;
 
-    public UserEditDialogPresenterImpl(UserEditDialogView view) {
+    public UserEditDialogPresenter(UserEditDialogView view) {
         this.view = view;
-        this.view.setPresenter(this);
+        this.view.setDelegate(this);
     }
 
     public void onOkButtonClicked() {
@@ -35,7 +34,7 @@ public class UserEditDialogPresenterImpl implements UserEditDialogPresenter {
         view.closeDialogBox();
     }
 
-    public void showDialog(User user, MainPresenterImpl.CallBack callBack) {
+    public void showDialog(User user, MainPresenter.CallBack callBack) {
         this.callBack = callBack;
 
         if (user==null) {
@@ -51,6 +50,7 @@ public class UserEditDialogPresenterImpl implements UserEditDialogPresenter {
             view.setFirstName(user.getAge());
             view.setFirstName(user.getAddress());
         }
+        view.setFocusOnFirstName();
         view.showDialog();
     }
 }
