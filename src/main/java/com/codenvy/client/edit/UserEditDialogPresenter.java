@@ -5,7 +5,9 @@ import com.codenvy.client.User;
 import com.codenvy.client.main.MainPresenter;
 import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class UserEditDialogPresenter implements UserEditDialogView.ActionDelegate {
     private final UserEditDialogView view;
 

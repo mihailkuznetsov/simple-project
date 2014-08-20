@@ -11,10 +11,12 @@ import com.codenvy.client.events.ChangeToRussianEventHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Singleton
 public class MainPresenter implements MainView.ActionDelegate {
     private final MainView view;
 

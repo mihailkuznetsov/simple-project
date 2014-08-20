@@ -1,7 +1,7 @@
 package com.codenvy.client;
 
 public class User {
-   private String firstName;
+    private String firstName;
 
     private String lastName;
 
