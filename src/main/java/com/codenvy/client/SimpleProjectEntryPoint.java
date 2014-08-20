@@ -1,12 +1,8 @@
 package com.codenvy.client;
 
-import com.codenvy.client.edit.UserEditDialogPresenter;
-import com.codenvy.client.main.MainPresenter;
-import com.codenvy.client.main.MainViewImpl;
-import com.codenvy.client.edit.UserEditDialogViewImpl;
+import com.codenvy.client.di.SimpleProjectGinjector;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 /**

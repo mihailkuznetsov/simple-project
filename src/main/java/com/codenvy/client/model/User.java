@@ -1,4 +1,4 @@
-package com.codenvy.client;
+package com.codenvy.client.model;
 
 public class User {
     private String firstName;

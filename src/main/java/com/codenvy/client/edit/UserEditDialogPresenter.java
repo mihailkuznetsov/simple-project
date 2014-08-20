@@ -1,13 +1,11 @@
 package com.codenvy.client.edit;
 
 import com.codenvy.client.SimpleProjectMessages;
-import com.codenvy.client.User;
+import com.codenvy.client.model.User;
 import com.codenvy.client.main.MainPresenter;
 import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
-@Singleton
 public class UserEditDialogPresenter implements UserEditDialogView.ActionDelegate {
     private final UserEditDialogView view;
 
@@ -41,7 +39,7 @@ public class UserEditDialogPresenter implements UserEditDialogView.ActionDelegat
     public void showDialog(User user, MainPresenter.CallBack callBack) {
         this.callBack = callBack;
 
-        if (user==null) {
+        if (user == null) {
             view.setDialogTitle(SimpleProjectMessages.IMPL.addDialogTitle());
             view.setFirstName("");
             view.setLastName("");

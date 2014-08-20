@@ -1,8 +1,10 @@
 package com.codenvy.client.edit;
 
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.inject.ImplementedBy;
 
-public interface UserEditDialogView extends IsWidget{
+@ImplementedBy(UserEditDialogViewImpl.class)
+public interface UserEditDialogView extends IsWidget {
     public interface ActionDelegate {
         void onOkButtonClicked();
 

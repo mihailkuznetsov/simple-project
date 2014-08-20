@@ -1,17 +1,21 @@
 package com.codenvy.client.edit;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogView {
+
+    @Singleton
     interface EditUserInfoViewUiBinder extends UiBinder<Widget, UserEditDialogViewImpl> {
     }
-
-    private static EditUserInfoViewUiBinder ourUiBinder = GWT.create(EditUserInfoViewUiBinder.class);
 
     private ActionDelegate delegate;
 
@@ -33,8 +37,10 @@ public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogV
     @UiField
     Button cancelButton;
 
-    public UserEditDialogViewImpl() {
+    @Inject
+    public UserEditDialogViewImpl(EditUserInfoViewUiBinder ourUiBinder) {
         setWidget(ourUiBinder.createAndBindUi(this));
+
         this.setAnimationEnabled(true);
         this.setGlassEnabled(true);
     }
@@ -55,7 +61,7 @@ public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogV
         return age.getText();
     }
 
-    public String  getAddress() {
+    public String getAddress() {
         return address.getText();
     }
 

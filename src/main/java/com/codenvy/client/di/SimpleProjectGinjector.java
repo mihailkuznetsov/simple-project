@@ -1,6 +1,5 @@
-package com.codenvy.client;
+package com.codenvy.client.di;
 
-import com.codenvy.client.edit.UserEditDialogPresenter;
 import com.codenvy.client.main.MainPresenter;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;

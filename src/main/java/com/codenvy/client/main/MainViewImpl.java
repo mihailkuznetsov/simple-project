@@ -1,52 +1,66 @@
 package com.codenvy.client.main;
 
 import com.codenvy.client.SimpleProjectMessages;
-import com.codenvy.client.User;
-import com.google.gwt.core.client.GWT;
+import com.codenvy.client.model.User;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.client.ui.*;
-import com.google.gwt.view.client.*;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.view.client.NoSelectionModel;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import java.util.List;
 
 
 public class MainViewImpl extends Composite implements MainView {
+
+    @Singleton
     interface MyViewImplUiBinder extends UiBinder<DockLayoutPanel, MainViewImpl> {
     }
 
-    private static MyViewImplUiBinder ourUiBinder = GWT.create(MyViewImplUiBinder.class);
+    @UiField
+    Button addButton;
 
-    @UiField Button addButton;
+    @UiField
+    Button editButton;
 
-    @UiField Button editButton;
+    @UiField
+    Button deleteButton;
 
-    @UiField Button deleteButton;
+    @UiField(provided = true)
+    CellTable<User> table;
 
-    @UiField(provided = true) CellTable<User> table;
+    @UiField
+    Button englishButton;
 
-    @UiField Button englishButton;
+    @UiField
+    Button russianButton;
 
-    @UiField Button russianButton;
+    @UiField
+    Label info;
 
-    @UiField Label info;
-
-    @UiField Label userAmountLabel;
+    @UiField
+    Label userAmountLabel;
 
     private ActionDelegate delegate;
 
-    public MainViewImpl() {
+    @Inject
+    public MainViewImpl(MyViewImplUiBinder ourUiBinder) {
         initCellTable();
         initWidget(ourUiBinder.createAndBindUi(this));
         userAmountLabel.setText(SimpleProjectMessages.IMPL.userAmount(0));
     }
 
     private void initCellTable() {
-        table = new CellTable<User>();
+        table = new CellTable<>();
 
         table.addColumn(new TextColumn<User>() {
             @Override
@@ -94,7 +108,6 @@ public class MainViewImpl extends Composite implements MainView {
     public void setInfoText(String text) {
         info.setText(text);
     }
-
 
 
     public void setUsers(List<User> users) {

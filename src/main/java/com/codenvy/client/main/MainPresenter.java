@@ -2,12 +2,12 @@ package com.codenvy.client.main;
 
 import com.codenvy.client.ResourceBundle;
 import com.codenvy.client.SimpleProjectMessages;
-import com.codenvy.client.User;
 import com.codenvy.client.edit.UserEditDialogPresenter;
 import com.codenvy.client.events.ChangeToEnglishEvent;
 import com.codenvy.client.events.ChangeToEnglishEventHandler;
 import com.codenvy.client.events.ChangeToRussianEvent;
 import com.codenvy.client.events.ChangeToRussianEventHandler;
+import com.codenvy.client.model.User;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
@@ -33,7 +33,7 @@ public class MainPresenter implements MainView.ActionDelegate {
     private final CallBack editCallBack;
 
     @Inject
-    public MainPresenter(MainView mainView, UserEditDialogPresenter userEditDialogPresenter, EventBus eventBus){
+    public MainPresenter(MainView mainView, UserEditDialogPresenter userEditDialogPresenter, EventBus eventBus) {
         this.view = mainView;
         this.view.setDelegate(this);
 

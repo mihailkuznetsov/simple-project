@@ -5,7 +5,7 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.TextResource;
 
-public interface ResourceBundle extends ClientBundle{
+public interface ResourceBundle extends ClientBundle {
     ResourceBundle IMPL = GWT.create(ResourceBundle.class);
 
     @Source("SimpleProject.css")

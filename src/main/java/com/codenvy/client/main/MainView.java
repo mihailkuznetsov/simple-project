@@ -1,12 +1,13 @@
 package com.codenvy.client.main;
 
-import com.codenvy.client.User;
-import com.codenvy.client.main.MainPresenter;
+import com.codenvy.client.model.User;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.inject.ImplementedBy;
 
 import java.util.List;
 
-public interface MainView extends IsWidget{
+@ImplementedBy(MainViewImpl.class)
+public interface MainView extends IsWidget {
     public interface ActionDelegate {
         void onUserSelected(User lastSelectedUser);
 
@@ -24,7 +25,6 @@ public interface MainView extends IsWidget{
     void setDelegate(ActionDelegate delegate);
 
     void setInfoText(String text);
-
 
     void setUsers(List<User> users);
 
