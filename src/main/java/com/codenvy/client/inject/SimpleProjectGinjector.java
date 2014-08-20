@@ -1,4 +1,4 @@
-package com.codenvy.client.di;
+package com.codenvy.client.inject;
 
 import com.codenvy.client.main.MainPresenter;
 import com.google.gwt.inject.client.GinModules;

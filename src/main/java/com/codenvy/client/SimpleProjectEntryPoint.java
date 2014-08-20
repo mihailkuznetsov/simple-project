@@ -1,6 +1,6 @@
 package com.codenvy.client;
 
-import com.codenvy.client.di.SimpleProjectGinjector;
+import com.codenvy.client.inject.SimpleProjectGinjector;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootLayoutPanel;

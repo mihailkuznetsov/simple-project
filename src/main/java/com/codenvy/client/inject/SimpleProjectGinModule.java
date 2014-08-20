@@ -4,7 +4,7 @@
  * Date: 19.08.14
  * Time: 16:05
  */
-package com.codenvy.client.di;
+package com.codenvy.client.inject;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
