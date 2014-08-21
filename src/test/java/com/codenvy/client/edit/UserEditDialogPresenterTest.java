@@ -37,7 +37,7 @@ public class UserEditDialogPresenterTest {
 
     @Test
     public void testShowAddDialog() {
-        presenter.showDialog(null, callBack);
+        presenter.showDialog(null , callBack);
 
         verify(view).setDialogTitle(messages.addDialogTitle());
         verify(view).setFirstName("");
@@ -69,7 +69,7 @@ public class UserEditDialogPresenterTest {
     }
 
     @Test
-    public void onOkClickedWhenUserHasNotEmptyFields() {
+    public void testOkClickedWhenUserHasNotEmptyFields() {
         when(view.getFirstName()).thenReturn("1");
         when(view.getLastName()).thenReturn("2");
         when(view.getAge()).thenReturn("3");
@@ -89,7 +89,7 @@ public class UserEditDialogPresenterTest {
     }
 
     @Test
-    public void onOkClickedWhenUserHasEmptyFields() {
+    public void testOkClickedWhenUserHasEmptyFields() {
         when(view.getFirstName()).thenReturn("1");
         when(view.getLastName()).thenReturn("");
         when(view.getAge()).thenReturn("3");
@@ -107,7 +107,7 @@ public class UserEditDialogPresenterTest {
     }
 
     @Test
-    public void OnCancelClicked() {
+    public void testOnCancelClicked() {
         presenter.onCancelButtonClicked();
 
         verify(view).closeDialogBox();

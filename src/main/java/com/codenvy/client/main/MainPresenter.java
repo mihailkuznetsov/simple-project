@@ -56,7 +56,7 @@ public class MainPresenter implements MainView.ActionDelegate {
 
         this.messages = messages;
 
-        this.users = new ArrayList<User>();
+        this.users = new ArrayList<>();
 
         this.addCallBack = new CallBack() {
             public void onUserChanged(User user) {
