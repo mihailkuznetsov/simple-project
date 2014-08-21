@@ -1,11 +1,10 @@
 package com.codenvy.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Messages;
+import com.google.inject.Singleton;
 
+@Singleton
 public interface SimpleProjectMessages extends Messages {
-    SimpleProjectMessages IMPL = GWT.create(SimpleProjectMessages.class);
-
     String add();
 
     String edit();

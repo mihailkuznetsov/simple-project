@@ -2,6 +2,7 @@ package com.codenvy.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.TextResource;
 
@@ -19,4 +20,16 @@ public interface ResourceBundle extends ClientBundle {
 
     @Source("info_ru.txt")
     TextResource info_ru();
+
+    public interface MainResource extends CssResource {
+        String buttonPanel();
+
+        String table();
+
+        String button();
+
+        String image();
+
+        String userAmountLabel();
+    }
 }

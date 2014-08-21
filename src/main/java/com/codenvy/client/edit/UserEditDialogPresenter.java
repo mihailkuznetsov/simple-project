@@ -1,9 +1,8 @@
 package com.codenvy.client.edit;
 
 import com.codenvy.client.SimpleProjectMessages;
-import com.codenvy.client.model.User;
 import com.codenvy.client.main.MainPresenter;
-import com.google.gwt.user.client.Window;
+import com.codenvy.client.model.User;
 import com.google.inject.Inject;
 
 public class UserEditDialogPresenter implements UserEditDialogView.ActionDelegate {
@@ -11,10 +10,13 @@ public class UserEditDialogPresenter implements UserEditDialogView.ActionDelegat
 
     private MainPresenter.CallBack callBack;
 
+    private final SimpleProjectMessages messages;
+
     @Inject
-    public UserEditDialogPresenter(UserEditDialogView view) {
+    public UserEditDialogPresenter(UserEditDialogView view, SimpleProjectMessages messages) {
         this.view = view;
         this.view.setDelegate(this);
+        this.messages = messages;
     }
 
     public void onOkButtonClicked() {
@@ -24,7 +26,7 @@ public class UserEditDialogPresenter implements UserEditDialogView.ActionDelegat
         String address = view.getAddress();
 
         if (firstName.isEmpty() || (lastName.isEmpty()) || (age.isEmpty()) || address.isEmpty()) {
-            Window.alert(SimpleProjectMessages.IMPL.emptyUserDataErrorMessage());
+//            Window.alert(messages.emptyUserDataErrorMessage());
         } else {
             callBack.onUserChanged(new User(firstName, lastName,
                     age, address));
@@ -40,17 +42,17 @@ public class UserEditDialogPresenter implements UserEditDialogView.ActionDelegat
         this.callBack = callBack;
 
         if (user == null) {
-            view.setDialogTitle(SimpleProjectMessages.IMPL.addDialogTitle());
+            view.setDialogTitle(messages.addDialogTitle());
             view.setFirstName("");
             view.setLastName("");
             view.setAge("");
             view.setAddress("");
         } else {
-            view.setDialogTitle(SimpleProjectMessages.IMPL.editDialogTitle());
+            view.setDialogTitle(messages.editDialogTitle());
             view.setFirstName(user.getFirstName());
-            view.setFirstName(user.getLastName());
-            view.setFirstName(user.getAge());
-            view.setFirstName(user.getAddress());
+            view.setLastName(user.getLastName());
+            view.setAge(user.getAge());
+            view.setAddress(user.getAddress());
         }
         view.setFocusOnFirstName();
         view.showDialog();

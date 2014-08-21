@@ -10,10 +10,11 @@
             text-align: center;
         }
 
-        .buttonPanel{
+        .buttonPanel {
             margin-right: 8px;
             text-align: right;
         }
+
         .button {
             margin: 5px 2px;
             width: 60px;
@@ -23,7 +24,7 @@
 
         .textBox {
             margin: 5px;
-            width : 100px;
+            width: 100px;
             float: left;
         }
 
@@ -35,23 +36,23 @@
 
     </ui:style>
 
-        <g:FlowPanel width="230px" height="180px">
-            <g:Label text="{msg.firstName}" addStyleNames="{style.label}"/>
-            <g:TextBox ui:field="firstName" addStyleNames="{style.textBox}"/>
+    <g:FlowPanel width="230px" height="180px">
+        <g:Label text="{msg.firstName}" addStyleNames="{style.label}"/>
+        <g:TextBox ui:field="firstName" addStyleNames="{style.textBox}"/>
 
-            <g:Label text="{msg.lastName}" addStyleNames="{style.label}"/>
-            <g:TextBox ui:field="lastName" addStyleNames="{style.textBox}"/>
+        <g:Label text="{msg.lastName}" addStyleNames="{style.label}"/>
+        <g:TextBox ui:field="lastName" addStyleNames="{style.textBox}"/>
 
-            <g:Label text="{msg.age}" addStyleNames="{style.label}"/>
-            <g:TextBox ui:field="age" addStyleNames="{style.textBox}"/>
+        <g:Label text="{msg.age}" addStyleNames="{style.label}"/>
+        <g:TextBox ui:field="age" addStyleNames="{style.textBox}"/>
 
-            <g:Label text="{msg.address}" addStyleNames="{style.label}"/>
-            <g:TextBox ui:field="address" addStyleNames="{style.textBox}"/>
+        <g:Label text="{msg.address}" addStyleNames="{style.label}"/>
+        <g:TextBox ui:field="address" addStyleNames="{style.textBox}"/>
 
-            <g:FlowPanel addStyleNames="{style.buttonPanel}">
-                <g:Button text="{msg.ok}" ui:field="okButton" addStyleNames="{style.button}"/>
-                <g:Button text="{msg.cancel}" ui:field="cancelButton" addStyleNames="{style.button}"/>
-            </g:FlowPanel>
-
+        <g:FlowPanel addStyleNames="{style.buttonPanel}">
+            <g:Button text="{msg.ok}" ui:field="okButton" addStyleNames="{style.button}"/>
+            <g:Button text="{msg.cancel}" ui:field="cancelButton" addStyleNames="{style.button}"/>
         </g:FlowPanel>
+
+    </g:FlowPanel>
 </ui:UiBinder>

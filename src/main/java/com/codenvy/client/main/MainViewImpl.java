@@ -26,6 +26,10 @@ public class MainViewImpl extends Composite implements MainView {
     interface MyViewImplUiBinder extends UiBinder<DockLayoutPanel, MainViewImpl> {
     }
 
+    private final SimpleProjectMessages messages;
+
+    private ActionDelegate delegate;
+
     @UiField
     Button addButton;
 
@@ -50,13 +54,12 @@ public class MainViewImpl extends Composite implements MainView {
     @UiField
     Label userAmountLabel;
 
-    private ActionDelegate delegate;
-
     @Inject
-    public MainViewImpl(MyViewImplUiBinder ourUiBinder) {
+    public MainViewImpl(MyViewImplUiBinder ourUiBinder, SimpleProjectMessages messages) {
+        this.messages = messages;
         initCellTable();
         initWidget(ourUiBinder.createAndBindUi(this));
-        userAmountLabel.setText(SimpleProjectMessages.IMPL.userAmount(0));
+        userAmountLabel.setText(messages.userAmount(0));
     }
 
     private void initCellTable() {
@@ -67,30 +70,30 @@ public class MainViewImpl extends Composite implements MainView {
             public String getValue(User user) {
                 return user.getFirstName();
             }
-        }, SimpleProjectMessages.IMPL.firstName());
+        }, messages.firstName());
 
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getLastName();
             }
-        }, SimpleProjectMessages.IMPL.lastName());
+        }, messages.lastName());
 
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getAge();
             }
-        }, SimpleProjectMessages.IMPL.age());
+        }, messages.age());
 
         table.addColumn(new TextColumn<User>() {
             @Override
             public String getValue(User user) {
                 return user.getAddress();
             }
-        }, SimpleProjectMessages.IMPL.address());
+        }, messages.address());
 
-        table.setLoadingIndicator(new Label(SimpleProjectMessages.IMPL.emptyTableIndicator()));
+        table.setLoadingIndicator(new Label(messages.emptyTableIndicator()));
 
         final NoSelectionModel<User> smodel = new NoSelectionModel<User>();
         table.setSelectionModel(smodel);
