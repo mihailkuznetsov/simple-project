@@ -10,9 +10,9 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
  */
 public class SimpleProjectEntryPoint implements EntryPoint {
 
-    private final SimpleProjectGinjector injector = GWT.create(SimpleProjectGinjector.class);
-
     public void onModuleLoad() {
+        SimpleProjectGinjector injector = GWT.create(SimpleProjectGinjector.class);
+
         ResourceBundle.IMPL.css().ensureInjected();
 
         injector.getMainPresenter().go(RootLayoutPanel.get());

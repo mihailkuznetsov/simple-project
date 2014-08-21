@@ -18,11 +18,14 @@ import java.util.List;
 
 @Singleton
 public class MainPresenter implements MainView.ActionDelegate {
+
     private final MainView view;
 
     private final UserEditDialogPresenter dialogPresenter;
 
     private final EventBus eventBus;
+
+    private final SimpleProjectMessages messages;
 
     private final List<User> users;
 
@@ -33,7 +36,7 @@ public class MainPresenter implements MainView.ActionDelegate {
     private final CallBack editCallBack;
 
     @Inject
-    public MainPresenter(MainView mainView, UserEditDialogPresenter userEditDialogPresenter, EventBus eventBus) {
+    public MainPresenter(MainView mainView, UserEditDialogPresenter userEditDialogPresenter, EventBus eventBus, final SimpleProjectMessages messages) {
         this.view = mainView;
         this.view.setDelegate(this);
 
@@ -51,13 +54,15 @@ public class MainPresenter implements MainView.ActionDelegate {
             }
         });
 
+        this.messages = messages;
+
         this.users = new ArrayList<User>();
 
         this.addCallBack = new CallBack() {
             public void onUserChanged(User user) {
                 users.add(user);
                 view.setUsers(users);
-                view.setUserAmountLabel(SimpleProjectMessages.IMPL.userAmount(users.size()));
+                view.setUserAmountLabel(messages.userAmount(users.size()));
                 view.setEditButtonEnabled(false);
                 view.setDeleteButtonEnabled(false);
             }
@@ -85,7 +90,7 @@ public class MainPresenter implements MainView.ActionDelegate {
     public void onDeleteButtonClicked() {
         users.remove(lastSelectedUser);
         view.setUsers(users);
-        view.setUserAmountLabel(SimpleProjectMessages.IMPL.userAmount(users.size()));
+        view.setUserAmountLabel(messages.userAmount(users.size()));
         view.setEditButtonEnabled(false);
         view.setDeleteButtonEnabled(false);
     }
