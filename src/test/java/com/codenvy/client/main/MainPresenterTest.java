@@ -43,9 +43,6 @@ public class MainPresenterTest {
     @Mock
     User user;
 
-    @Mock
-    MainPresenter.CallBack callBack;
-
     @InjectMocks
     MainPresenter presenter;
 
