@@ -6,13 +6,18 @@ import com.codenvy.client.events.ChangeToEnglishEvent;
 import com.codenvy.client.events.ChangeToRussianEvent;
 import com.codenvy.client.model.User;
 import com.google.gwt.event.shared.EventBus;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.anyObject;
@@ -36,24 +41,30 @@ public class MainPresenterTest {
     SimpleProjectMessages messages;
 
     @Mock
-    MainPresenter.CallBack callBack;
-
-    @Mock
     User user;
 
+    @Mock
+    MainPresenter.CallBack callBack;
+
+    @InjectMocks
     MainPresenter presenter;
 
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(MainPresenterTest.class);
-        presenter = new MainPresenter(view, dialogPresenter, eventBus, messages);
-    }
-
     @Test
-    public void onAddButtonClicked() {
+    public void testAddButtonClicked() {
         presenter.onAddButtonClicked();
 
         verify(dialogPresenter).showDialog((User) isNull(), (MainPresenter.CallBack) anyObject());
+    }
+
+    @Test
+    public void testEditButtonClicked() {
+        presenter.onUserSelected(user);
+        presenter.onEditButtonClicked();
+
+        verify(view).setEditButtonEnabled(true);
+        verify(view).setDeleteButtonEnabled(true);
+
+        verify(dialogPresenter).showDialog((User) anyObject(), (MainPresenter.CallBack) anyObject());
     }
 
     @Test
@@ -61,62 +72,81 @@ public class MainPresenterTest {
         presenter.onUserSelected(user);
         presenter.onDeleteButtonClicked();
 
+        verify(view).setEditButtonEnabled(true);
+        verify(view).setDeleteButtonEnabled(true);
+
         verify(view).setUsers(anyListOf(User.class));
         verify(view).setUserAmountLabel(messages.userAmount(anyInt()));
+
         verify(view).setEditButtonEnabled(false);
         verify(view).setDeleteButtonEnabled(false);
     }
 
     @Test
-    public void onEnglishButtonClicked() {
+    public void testEnglishButtonClicked() {
         presenter.onEnglishButtonClicked();
 
         verify(eventBus).fireEvent(isA(ChangeToEnglishEvent.class));
     }
 
     @Test
-    public void onRussianButtonClicked() {
+    public void testRussianButtonClicked() {
         presenter.onRussianButtonClicked();
 
         verify(eventBus).fireEvent(isA(ChangeToRussianEvent.class));
     }
 
     @Test
-    public void onUserSelected() {
-        presenter.onUserSelected((User) anyObject());
-
-        verify(view).setEditButtonEnabled(true);
-        verify(view).setDeleteButtonEnabled(true);
-    }
-
-    @Test
     public void testAddCallBack() {
+        doAnswer(new Answer<Void>() {
+            @Override
+            public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
+                MainPresenter.CallBack callBack = (MainPresenter.CallBack) invocationOnMock.getArguments()[1];
+                callBack.onUserChanged((User) anyObject());
+                return null;
+            }
+        }).when(dialogPresenter).showDialog((User) isNull(), (MainPresenter.CallBack) anyObject());
+
         presenter.onAddButtonClicked();
-        dialogPresenter.onOkButtonClicked();
 
-        doCallRealMethod().when(dialogPresenter).onOkButtonClicked();
+        ArgumentCaptor<List> argument = ArgumentCaptor.forClass(List.class);
+        verify(view).setUsers(argument.capture());
+        assertTrue(argument.getValue().contains(user));
+        verify(view).setUserAmountLabel(messages.userAmount(argument.getValue().size()));
 
-
-        verify(view).setUsers(anyListOf(User.class));
+        verify(view).setEditButtonEnabled(false);
+        verify(view).setDeleteButtonEnabled(false);
     }
 
     @Test
     public void testEditCallBack() {
-        when(user.getFirstName()).thenReturn("1");
-        when(user.getLastName()).thenReturn("2");
-        when(user.getAge()).thenReturn("3");
-        when(user.getAddress()).thenReturn("4");
+        doAnswer(new Answer<Void>() {
+            @Override
+            public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
+                MainPresenter.CallBack callBack = (MainPresenter.CallBack) invocationOnMock.getArguments()[1];
+                callBack.onUserChanged(user);
+                return null;
+            }
+        }).when(dialogPresenter).showDialog((User) isNull(), (MainPresenter.CallBack) anyObject());
 
-        doCallRealMethod().when(dialogPresenter).onOkButtonClicked();
+        doAnswer(new Answer<Void>() {
+            @Override
+            public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
+                MainPresenter.CallBack callBack = (MainPresenter.CallBack) invocationOnMock.getArguments()[1];
+                callBack.onUserChanged(user);
+                return null;
+            }
+        }).when(dialogPresenter).showDialog((User) anyObject(), (MainPresenter.CallBack) anyObject());
 
+        presenter.onAddButtonClicked();
         presenter.onUserSelected(user);
         presenter.onEditButtonClicked();
-        dialogPresenter.onOkButtonClicked();
 
-        verify(dialogPresenter).showDialog(user, callBack);
-        verify(view).setUsers(anyListOf(User.class));
-        verify(view).setUserAmountLabel(messages.userAmount(anyInt()));
-        verify(view).setEditButtonEnabled(false);
-        verify(view).setDeleteButtonEnabled(false);
+        ArgumentCaptor<List> argument = ArgumentCaptor.forClass(List.class);
+        verify(view, times(2)).setUsers(argument.capture());
+        assertTrue(argument.getValue().contains(user));
+
+        verify(view, times(2)).setEditButtonEnabled(false);
+        verify(view, times(2)).setDeleteButtonEnabled(false);
     }
 }
