@@ -54,7 +54,8 @@ public class UserEditDialogPresenter implements UserEditDialogView.ActionDelegat
             view.setAge(user.getAge());
             view.setAddress(user.getAddress());
         }
-        view.setFocusOnFirstName();
+
         view.showDialog();
+        view.setFocusOnFirstName();
     }
 }

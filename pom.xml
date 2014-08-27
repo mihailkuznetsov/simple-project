@@ -36,19 +36,18 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.7</version>
+      <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+      <dependency>
+      <groupId>com.googlecode.gwt-test-utils</groupId>
+      <artifactId>gwt-test-utils</artifactId>
+      <version>0.47</version>
     </dependency>
     <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-all</artifactId>
         <version>1.9.5</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>com.googlecode.gwt-test-utils</groupId>
-        <artifactId>gwt-test-utils</artifactId>
-        <version>0.45</version>
         <scope>test</scope>
     </dependency>
     <dependency>
@@ -72,6 +71,15 @@
   </dependencies>
 
   <build>
+
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+
     <!-- Generate compiled stuff in the folder used for developing mode -->
     <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
 
@@ -82,22 +90,11 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
         <version>2.6.1</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>compile</goal>
-              <goal>test</goal>
-              <goal>i18n</goal>
-              <goal>generateAsync</goal>
-            </goals>
-          </execution>
-        </executions>
         <!-- Plugin configuration. There are many available options, see 
           gwt-maven-plugin documentation at codehaus.org -->
         <configuration>
           <runTarget>SimpleProject.html</runTarget>
           <hostedWebapp>${webappDirectory}</hostedWebapp>
-          <i18nMessagesBundle>com.codenvy.client.Messages</i18nMessagesBundle>
         </configuration>
       </plugin>
 

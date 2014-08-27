@@ -9,6 +9,7 @@ import com.google.gwt.event.shared.EventBus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
@@ -17,66 +18,117 @@ import org.mockito.stubbing.Answer;
 
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyListOf;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.isA;
-import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MainPresenterTest {
 
-    @Mock
-    MainView view;
+    private static final String USER_AMOUNT = "USER_AMOUNT";
+
+    @Captor
+    private ArgumentCaptor<List<User>> listCaptor;
 
     @Mock
-    UserEditDialogPresenter dialogPresenter;
+    private MainView view;
 
     @Mock
-    EventBus eventBus;
+    private UserEditDialogPresenter dialogPresenter;
 
     @Mock
-    SimpleProjectMessages messages;
+    private EventBus eventBus;
 
     @Mock
-    User user;
+    private SimpleProjectMessages messages;
+
+    @Mock
+    private User user;
+
+    @Mock
+    private MainPresenter.CallBack callBack;
 
     @InjectMocks
-    MainPresenter presenter;
+    private MainPresenter presenter;
+
 
     @Test
-    public void testAddButtonClicked() {
+    public void testAddButtonClickedWithCallBack() {
+        when(messages.userAmount(anyInt())).thenReturn(USER_AMOUNT);
+        initAddCallBack();
+
         presenter.onAddButtonClicked();
 
-        verify(dialogPresenter).showDialog((User) isNull(), (MainPresenter.CallBack) anyObject());
-    }
+        verify(dialogPresenter).showDialog(eq((User) null), isA(MainPresenter.CallBack.class));
 
-    @Test
-    public void testEditButtonClicked() {
-        presenter.onUserSelected(user);
-        presenter.onEditButtonClicked();
+        verify(view).setUsers(listCaptor.capture());
+        assertTrue(listCaptor.getValue().contains(user));
 
-        verify(view).setEditButtonEnabled(true);
-        verify(view).setDeleteButtonEnabled(true);
-
-        verify(dialogPresenter).showDialog((User) anyObject(), (MainPresenter.CallBack) anyObject());
-    }
-
-    @Test
-    public void testDeleteUser() {
-        presenter.onUserSelected(user);
-        presenter.onDeleteButtonClicked();
-
-        verify(view).setEditButtonEnabled(true);
-        verify(view).setDeleteButtonEnabled(true);
-
-        verify(view).setUsers(anyListOf(User.class));
-        verify(view).setUserAmountLabel(messages.userAmount(anyInt()));
+        ArgumentCaptor<Integer> afterListSize = ArgumentCaptor.forClass(Integer.class);
+        verify(messages).userAmount(afterListSize.capture());
+        assertTrue(afterListSize.getValue().equals(listCaptor.getValue().size()));
+        verify(view).setUserAmountLabel(eq(USER_AMOUNT));
 
         verify(view).setEditButtonEnabled(false);
         verify(view).setDeleteButtonEnabled(false);
+    }
+
+    @Test
+    public void testEditButtonClickedWithCallBack() {
+        initAddCallBack();
+        presenter.onAddButtonClicked();
+        presenter.onUserSelected(user);
+
+        reset(view, dialogPresenter);
+        initEditCallBack();
+
+        presenter.onEditButtonClicked();
+
+        verify(dialogPresenter).showDialog(isA(User.class), isA(MainPresenter.CallBack.class));
+
+        verify(view).setUsers(listCaptor.capture());
+        assertTrue(listCaptor.getValue().contains(user));
+
+        verify(view).setEditButtonEnabled(false);
+        verify(view).setDeleteButtonEnabled(false);
+    }
+
+    @Test
+    public void testDeleteButtonClicked() {
+        initAddCallBack();
+        presenter.onAddButtonClicked();
+        presenter.onUserSelected(user);
+
+        verify(view).setUsers(listCaptor.capture());
+        assertTrue(listCaptor.getValue().contains(user));
+
+        reset(view, dialogPresenter, messages);
+        when(messages.userAmount(anyInt())).thenReturn(USER_AMOUNT);
+
+        presenter.onDeleteButtonClicked();
+
+        verify(view).setUsers(listCaptor.capture());
+        List<User> resultList = listCaptor.getValue();
+
+        assertFalse(resultList.contains(user));
+
+        ArgumentCaptor<Integer> afterListSize = ArgumentCaptor.forClass(Integer.class);
+        verify(messages).userAmount(afterListSize.capture());
+        assertTrue(afterListSize.getValue().equals(resultList.size()));
+        verify(view).setUserAmountLabel(eq(USER_AMOUNT));
+
+        verify(view).setEditButtonEnabled(false);
+        verify(view).setDeleteButtonEnabled(false);
+    }
+
+    @Test
+    public void testUserSelected() {
+        presenter.onUserSelected(user);
+
+        verify(view).setEditButtonEnabled(true);
+        verify(view).setDeleteButtonEnabled(true);
     }
 
     @Test
@@ -93,30 +145,18 @@ public class MainPresenterTest {
         verify(eventBus).fireEvent(isA(ChangeToRussianEvent.class));
     }
 
-    @Test
-    public void testAddCallBack() {
+    private void initAddCallBack() {
         doAnswer(new Answer<Void>() {
             @Override
             public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
                 MainPresenter.CallBack callBack = (MainPresenter.CallBack) invocationOnMock.getArguments()[1];
-                callBack.onUserChanged((User) anyObject());
+                callBack.onUserChanged(user);
                 return null;
             }
-        }).when(dialogPresenter).showDialog((User) isNull(), (MainPresenter.CallBack) anyObject());
-
-        presenter.onAddButtonClicked();
-
-        ArgumentCaptor<List> argument = ArgumentCaptor.forClass(List.class);
-        verify(view).setUsers(argument.capture());
-        assertTrue(argument.getValue().contains(user));
-        verify(view).setUserAmountLabel(messages.userAmount(argument.getValue().size()));
-
-        verify(view).setEditButtonEnabled(false);
-        verify(view).setDeleteButtonEnabled(false);
+        }).when(dialogPresenter).showDialog(eq((User) null), isA(MainPresenter.CallBack.class));
     }
 
-    @Test
-    public void testEditCallBack() {
+    private void initEditCallBack() {
         doAnswer(new Answer<Void>() {
             @Override
             public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
@@ -124,26 +164,6 @@ public class MainPresenterTest {
                 callBack.onUserChanged(user);
                 return null;
             }
-        }).when(dialogPresenter).showDialog((User) isNull(), (MainPresenter.CallBack) anyObject());
-
-        doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
-                MainPresenter.CallBack callBack = (MainPresenter.CallBack) invocationOnMock.getArguments()[1];
-                callBack.onUserChanged(user);
-                return null;
-            }
-        }).when(dialogPresenter).showDialog((User) anyObject(), (MainPresenter.CallBack) anyObject());
-
-        presenter.onAddButtonClicked();
-        presenter.onUserSelected(user);
-        presenter.onEditButtonClicked();
-
-        ArgumentCaptor<List> argument = ArgumentCaptor.forClass(List.class);
-        verify(view, times(2)).setUsers(argument.capture());
-        assertTrue(argument.getValue().contains(user));
-
-        verify(view, times(2)).setEditButtonEnabled(false);
-        verify(view, times(2)).setDeleteButtonEnabled(false);
+        }).when(dialogPresenter).showDialog(isA(User.class), isA(MainPresenter.CallBack.class));
     }
 }

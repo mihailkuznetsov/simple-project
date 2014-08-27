@@ -61,6 +61,9 @@ public class MainPresenter implements MainView.ActionDelegate {
         this.addCallBack = new CallBack() {
             public void onUserChanged(User user) {
                 users.add(user);
+//                List<User> list = new ArrayList<>();
+//                list.add(new User("1","1","1","2"));
+//                list.add(new User("2","23","32","32"));
                 view.setUsers(users);
                 view.setUserAmountLabel(messages.userAmount(users.size()));
                 view.setEditButtonEnabled(false);
@@ -89,8 +92,10 @@ public class MainPresenter implements MainView.ActionDelegate {
 
     public void onDeleteButtonClicked() {
         users.remove(lastSelectedUser);
+
         view.setUsers(users);
         view.setUserAmountLabel(messages.userAmount(users.size()));
+
         view.setEditButtonEnabled(false);
         view.setDeleteButtonEnabled(false);
     }
