@@ -139,6 +139,7 @@ public class MainPresenterTest {
 
         verify(userStatusPresenter).showDialog(user);
     }
+
     @Test
     public void testUserSelected() {
         presenter.onUserSelected(user);
@@ -160,6 +161,11 @@ public class MainPresenterTest {
         presenter.onRussianButtonClicked();
 
         verify(eventBus).fireEvent(isA(ChangeToRussianEvent.class));
+    }
+
+    @Test
+    public void testGo() {
+        //TODO
     }
 
     private void initAddCallBack() {

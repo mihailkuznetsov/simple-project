@@ -18,10 +18,13 @@
 
         <g:east size="20">
             <g:FlowPanel addStyleNames="{res.css.buttonPanel} ">
-                <g:Button ui:field="addButton" text="{msg.add}" addStyleNames="{res.css.button}"/>
-                <g:Button ui:field="editButton" text="{msg.edit}" addStyleNames="{res.css.button}" enabled="false"/>
-                <g:Button ui:field="deleteButton" text="{msg.delete}" addStyleNames="{res.css.button}" enabled="false"/>
-                <g:Button ui:field="statusButton" text="{msg.status}" addStyleNames="{res.css.button}" enabled="false"/>
+                <g:Button ui:field="addButton" text="{msg.add}" addStyleNames="{res.css.controlButton}"/>
+                <g:Button ui:field="editButton" text="{msg.edit}" addStyleNames="{res.css.controlButton}"
+                          enabled="false"/>
+                <g:Button ui:field="deleteButton" text="{msg.delete}" addStyleNames="{res.css.controlButton}"
+                          enabled="false"/>
+                <g:Button ui:field="statusButton" text="{msg.status}" addStyleNames="{res.css.controlButton}"
+                          enabled="false"/>
             </g:FlowPanel>
         </g:east>
 
@@ -31,8 +34,8 @@
 
         <g:south size="20">
             <g:FlowPanel>
-                <g:Button ui:field="englishButton" text="English" addStyleNames="{res.css.button}"/>
-                <g:Button ui:field="russianButton" text="Русский" addStyleNames="{res.css.button}"/>
+                <g:Button ui:field="englishButton" text="English" addStyleNames="{res.css.controlButton}"/>
+                <g:Button ui:field="russianButton" text="Русский" addStyleNames="{res.css.controlButton}"/>
                 <g:Label ui:field="description" text="{res.info_en.getText}"/>
             </g:FlowPanel>
         </g:south>

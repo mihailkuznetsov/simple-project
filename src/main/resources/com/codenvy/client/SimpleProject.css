@@ -5,7 +5,7 @@
 .table {
     margin: 40px 100px;
 }
-.button {
+.controlButton {
     width: 120px;
     height: 30px;
     margin: 5px;
@@ -18,4 +18,15 @@
     width: 220px;
     margin: 20px;
     background-color: ghostwhite;
+}
+.dialogButtonPanel {
+    margin-right: 8px;
+    text-align: right;
+}
+
+.dialogButton {
+    margin: 5px 2px;
+    width: 60px;
+    height: 25px;
+    display: inline;
 }

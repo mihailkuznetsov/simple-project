@@ -107,27 +107,32 @@ public class MainViewImpl extends Composite implements MainView {
         });
     }
 
+    @Override
     public void setDelegate(ActionDelegate delegate) {
         this.delegate = delegate;
     }
 
+    @Override
     public void setDecriptionText(String text) {
         description.setText(text);
     }
 
-
+    @Override
     public void setUsers(List<User> users) {
         table.setRowData(users);
     }
 
+    @Override
     public void setUserAmountLabel(String text) {
         this.userAmountLabel.setText(text);
     }
 
+    @Override
     public void setEditButtonEnabled(boolean enabled) {
         editButton.setEnabled(enabled);
     }
 
+    @Override
     public void setDeleteButtonEnabled(boolean enabled) {
         deleteButton.setEnabled(enabled);
     }

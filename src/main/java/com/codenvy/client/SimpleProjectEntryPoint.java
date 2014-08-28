@@ -13,7 +13,7 @@ public class SimpleProjectEntryPoint implements EntryPoint {
     public void onModuleLoad() {
         SimpleProjectGinjector injector = GWT.create(SimpleProjectGinjector.class);
 
-        ResourceBundle.IMPL.css().ensureInjected();
+        injector.getResourceBundle().css().ensureInjected();
 
         injector.getMainPresenter().go(RootLayoutPanel.get());
     }

@@ -43,6 +43,6 @@ public class User {
     }
 
     public String getFullInfo() {
-        return firstName + " " + lastName + ", age 22" + age + ", address: " + address;
+        return firstName + " " + lastName + ", age " + age + ", address: " + address;
     }
 }

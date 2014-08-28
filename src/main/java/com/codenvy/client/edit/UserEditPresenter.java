@@ -19,6 +19,7 @@ public class UserEditPresenter implements UserEditView.ActionDelegate {
         this.messages = messages;
     }
 
+    @Override
     public void onOkButtonClicked() {
         String firstName = view.getFirstName();
         String lastName = view.getLastName();
@@ -34,6 +35,7 @@ public class UserEditPresenter implements UserEditView.ActionDelegate {
         }
     }
 
+    @Override
     public void onCancelButtonClicked() {
         view.closeDialog();
     }

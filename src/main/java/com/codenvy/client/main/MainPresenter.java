@@ -43,21 +43,24 @@ public class MainPresenter implements MainView.ActionDelegate {
                          UserEditPresenter userEditPresenter,
                          UserStatusPresenter userStatusPresenter,
                          EventBus eventBus,
-                         final SimpleProjectMessages messages) {
+                         final SimpleProjectMessages messages,
+                         final ResourceBundle resources) {
         this.view = mainView;
         this.view.setDelegate(this);
 
         this.userEditPresenter = userEditPresenter;
         this.userStatusPresenter = userStatusPresenter;
+
         this.eventBus = eventBus;
         eventBus.addHandler(ChangeToEnglishEvent.TYPE, new ChangeToEnglishEventHandler() {
+            @Override
             public void onChangeToEnglish(ChangeToEnglishEvent event) {
-                view.setDecriptionText(ResourceBundle.IMPL.info_en().getText());
+                view.setDecriptionText(resources.info_en().getText());
             }
         });
         eventBus.addHandler(ChangeToRussianEvent.TYPE, new ChangeToRussianEventHandler() {
             public void onChangeToRussian(ChangeToRussianEvent event) {
-                view.setDecriptionText(ResourceBundle.IMPL.info_ru().getText());
+                view.setDecriptionText(resources.info_ru().getText());
             }
         });
 
@@ -68,11 +71,10 @@ public class MainPresenter implements MainView.ActionDelegate {
         this.addCallBack = new CallBack() {
             public void onUserChanged(User user) {
                 users.add(user);
-//                List<User> list = new ArrayList<>();
-//                list.add(new User("1","1","1","2"));
-//                list.add(new User("2","23","32","32"));
+
                 view.setUsers(users);
                 view.setUserAmountLabel(messages.userAmount(users.size()));
+
                 view.setEditButtonEnabled(false);
                 view.setDeleteButtonEnabled(false);
                 view.setStatusButtonEnabled(false);
@@ -91,14 +93,17 @@ public class MainPresenter implements MainView.ActionDelegate {
         };
     }
 
+    @Override
     public void onAddButtonClicked() {
         userEditPresenter.showDialog(null, addCallBack);
     }
 
+    @Override
     public void onEditButtonClicked() {
         userEditPresenter.showDialog(lastSelectedUser, editCallBack);
     }
 
+    @Override
     public void onDeleteButtonClicked() {
         users.remove(lastSelectedUser);
 
@@ -108,21 +113,24 @@ public class MainPresenter implements MainView.ActionDelegate {
         view.setEditButtonEnabled(false);
         view.setDeleteButtonEnabled(false);
         view.setStatusButtonEnabled(false);
-
     }
 
+    @Override
     public void onStatusButtonClicked() {
         userStatusPresenter.showDialog(lastSelectedUser);
     }
 
+    @Override
     public void onEnglishButtonClicked() {
         eventBus.fireEvent(new ChangeToEnglishEvent());
     }
 
+    @Override
     public void onRussianButtonClicked() {
         eventBus.fireEvent(new ChangeToRussianEvent());
     }
 
+    @Override
     public void onUserSelected(User lastSelectedUser) {
         view.setEditButtonEnabled(true);
         view.setDeleteButtonEnabled(true);

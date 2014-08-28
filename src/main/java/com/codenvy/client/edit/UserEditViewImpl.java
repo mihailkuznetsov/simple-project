@@ -45,56 +45,69 @@ public class UserEditViewImpl extends DialogBox implements UserEditView {
         this.setGlassEnabled(true);
     }
 
+    @Override
     public void setDelegate(ActionDelegate delegate) {
         this.delegate = delegate;
     }
 
+    @Override
     public String getFirstName() {
         return firstName.getText();
     }
 
+    @Override
     public String getLastName() {
         return lastName.getText();
     }
 
+    @Override
     public String getAge() {
         return age.getText();
     }
 
+    @Override
     public String getAddress() {
         return address.getText();
     }
 
+    @Override
     public void setFirstName(String firstName) {
         this.firstName.setText(firstName);
     }
 
+    @Override
     public void setLastName(String lastName) {
         this.lastName.setText(lastName);
     }
 
+    @Override
     public void setAge(String age) {
         this.age.setText(age);
     }
 
+    @Override
     public void setAddress(String address) {
         this.address.setText(address);
     }
 
+    @Override
     public void setDialogTitle(String dialogTitle) {
         this.setText(dialogTitle);
     }
 
+    @Override
     public void showDialog() {
         this.center();
         this.show();
 
     }
 
+    @Override
     public void closeDialog() {
         this.hide();
     }
 
+    @Override
     public void setFocusOnFirstName() {
         this.firstName.setFocus(true);
     }

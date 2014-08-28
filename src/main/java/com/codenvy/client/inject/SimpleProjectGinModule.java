@@ -12,6 +12,7 @@ import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
 
 public class SimpleProjectGinModule extends AbstractGinModule {
+    @Override
     protected void configure() {
         bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
     }
