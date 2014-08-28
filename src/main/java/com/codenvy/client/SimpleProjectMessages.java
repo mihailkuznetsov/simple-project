@@ -11,6 +11,8 @@ public interface SimpleProjectMessages extends Messages {
 
     String delete();
 
+    String status();
+
     String ok();
 
     String cancel();
@@ -32,4 +34,10 @@ public interface SimpleProjectMessages extends Messages {
     String emptyTableIndicator();
 
     String userAmount(@PluralCount int userAmount);
+
+    String editUserInfo();
+
+    String currentUser();
+
+    String statusDialogTitle();
 }

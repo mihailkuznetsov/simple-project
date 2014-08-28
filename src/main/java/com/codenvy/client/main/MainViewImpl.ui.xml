@@ -21,6 +21,7 @@
                 <g:Button ui:field="addButton" text="{msg.add}" addStyleNames="{res.css.button}"/>
                 <g:Button ui:field="editButton" text="{msg.edit}" addStyleNames="{res.css.button}" enabled="false"/>
                 <g:Button ui:field="deleteButton" text="{msg.delete}" addStyleNames="{res.css.button}" enabled="false"/>
+                <g:Button ui:field="statusButton" text="{msg.status}" addStyleNames="{res.css.button}" enabled="false"/>
             </g:FlowPanel>
         </g:east>
 
@@ -32,7 +33,7 @@
             <g:FlowPanel>
                 <g:Button ui:field="englishButton" text="English" addStyleNames="{res.css.button}"/>
                 <g:Button ui:field="russianButton" text="Русский" addStyleNames="{res.css.button}"/>
-                <g:Label ui:field="info" text="{res.info_en.getText}"/>
+                <g:Label ui:field="description" text="{res.info_en.getText}"/>
             </g:FlowPanel>
         </g:south>
 

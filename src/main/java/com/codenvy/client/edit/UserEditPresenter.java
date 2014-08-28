@@ -5,15 +5,15 @@ import com.codenvy.client.main.MainPresenter;
 import com.codenvy.client.model.User;
 import com.google.inject.Inject;
 
-public class UserEditDialogPresenter implements UserEditDialogView.ActionDelegate {
-    private final UserEditDialogView view;
+public class UserEditPresenter implements UserEditView.ActionDelegate {
+    private final UserEditView view;
 
     private MainPresenter.CallBack callBack;
 
     private final SimpleProjectMessages messages;
 
     @Inject
-    public UserEditDialogPresenter(UserEditDialogView view, SimpleProjectMessages messages) {
+    public UserEditPresenter(UserEditView view, SimpleProjectMessages messages) {
         this.view = view;
         this.view.setDelegate(this);
         this.messages = messages;
@@ -30,12 +30,12 @@ public class UserEditDialogPresenter implements UserEditDialogView.ActionDelegat
         } else {
             callBack.onUserChanged(new User(firstName, lastName,
                     age, address));
-            view.closeDialogBox();
+            view.closeDialog();
         }
     }
 
     public void onCancelButtonClicked() {
-        view.closeDialogBox();
+        view.closeDialog();
     }
 
     public void showDialog(User user, MainPresenter.CallBack callBack) {

@@ -10,16 +10,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserEditDialogPresenterTest {
+public class UserEditPresenterTest {
     private static final String ADD_DIALOG_TITLE = "ADD_TITLE";
     private static final String EDIT_DIALOG_TITLE = "EDIT_TITLE";
 
     @Mock
-    private UserEditDialogView view;
+    private UserEditView view;
 
     @Mock
     private SimpleProjectMessages messages;
@@ -31,7 +31,7 @@ public class UserEditDialogPresenterTest {
     private MainPresenter.CallBack callBack;
 
     @InjectMocks
-    private UserEditDialogPresenter presenter;
+    private UserEditPresenter presenter;
 
     @Test
     public void testShowAddDialog() {
@@ -92,18 +92,18 @@ public class UserEditDialogPresenterTest {
         verify(callBack).onUserChanged(argument.capture());
 
         User newUser = argument.getValue();
-        assertTrue(newUser.getFirstName().equals("1"));
-        assertTrue(newUser.getLastName().equals("2"));
-        assertTrue(newUser.getAge().equals("3"));
-        assertTrue(newUser.getAddress().equals("4"));
+        assertEquals("1", newUser.getFirstName());
+        assertEquals("2", newUser.getLastName());
+        assertEquals("3", newUser.getAge());
+        assertEquals("4", newUser.getAddress());
 
-        verify(view).closeDialogBox();
+        verify(view).closeDialog();
     }
 
     @Test
     public void testOnCancelClicked() {
         presenter.onCancelButtonClicked();
 
-        verify(view).closeDialogBox();
+        verify(view).closeDialog();
     }
 }

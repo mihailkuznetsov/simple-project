@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 public class AddUserWithEmptyFieldsTest {
 
     @Mock
-    private UserEditDialogView view;
+    private UserEditView view;
 
     @Mock
     private SimpleProjectMessages messages;
@@ -33,7 +33,7 @@ public class AddUserWithEmptyFieldsTest {
     private MainPresenter.CallBack callBack;
 
     @InjectMocks
-    private UserEditDialogPresenter presenter;
+    private UserEditPresenter presenter;
 
     @Parameterized.Parameter
     public String firstName;
@@ -93,7 +93,6 @@ public class AddUserWithEmptyFieldsTest {
         verify(view).getAddress();
 
         verify(callBack, never()).onUserChanged((User) anyObject());
-        verify(view, never()).closeDialogBox();
-
+        verify(view, never()).closeDialog();
     }
 }

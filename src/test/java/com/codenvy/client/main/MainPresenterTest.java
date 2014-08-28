@@ -1,10 +1,11 @@
 package com.codenvy.client.main;
 
 import com.codenvy.client.SimpleProjectMessages;
-import com.codenvy.client.edit.UserEditDialogPresenter;
+import com.codenvy.client.edit.UserEditPresenter;
 import com.codenvy.client.events.ChangeToEnglishEvent;
 import com.codenvy.client.events.ChangeToRussianEvent;
 import com.codenvy.client.model.User;
+import com.codenvy.client.status.UserStatusPresenter;
 import com.google.gwt.event.shared.EventBus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,8 +37,10 @@ public class MainPresenterTest {
     private MainView view;
 
     @Mock
-    private UserEditDialogPresenter dialogPresenter;
+    private UserEditPresenter userEditPresenter;
 
+    @Mock
+    private UserStatusPresenter userStatusPresenter;
     @Mock
     private EventBus eventBus;
 
@@ -61,7 +64,7 @@ public class MainPresenterTest {
 
         presenter.onAddButtonClicked();
 
-        verify(dialogPresenter).showDialog(eq((User) null), isA(MainPresenter.CallBack.class));
+        verify(userEditPresenter).showDialog(eq((User) null), isA(MainPresenter.CallBack.class));
 
         verify(view).setUsers(listCaptor.capture());
         assertTrue(listCaptor.getValue().contains(user));
@@ -81,12 +84,12 @@ public class MainPresenterTest {
         presenter.onAddButtonClicked();
         presenter.onUserSelected(user);
 
-        reset(view, dialogPresenter);
+        reset(view, userEditPresenter);
         initEditCallBack();
 
         presenter.onEditButtonClicked();
 
-        verify(dialogPresenter).showDialog(isA(User.class), isA(MainPresenter.CallBack.class));
+        verify(userEditPresenter).showDialog(isA(User.class), isA(MainPresenter.CallBack.class));
 
         verify(view).setUsers(listCaptor.capture());
         assertTrue(listCaptor.getValue().contains(user));
@@ -104,7 +107,7 @@ public class MainPresenterTest {
         verify(view).setUsers(listCaptor.capture());
         assertTrue(listCaptor.getValue().contains(user));
 
-        reset(view, dialogPresenter, messages);
+        reset(view, userEditPresenter, messages);
         when(messages.userAmount(anyInt())).thenReturn(USER_AMOUNT);
 
         presenter.onDeleteButtonClicked();
@@ -123,6 +126,13 @@ public class MainPresenterTest {
         verify(view).setDeleteButtonEnabled(false);
     }
 
+    @Test
+    public void testStatusButtonClicked() {
+        presenter.onUserSelected(user);
+        presenter.onStatusButtonClicked();
+
+        verify(userStatusPresenter).showDialog(user);
+    }
     @Test
     public void testUserSelected() {
         presenter.onUserSelected(user);
@@ -153,7 +163,7 @@ public class MainPresenterTest {
                 callBack.onUserChanged(user);
                 return null;
             }
-        }).when(dialogPresenter).showDialog(eq((User) null), isA(MainPresenter.CallBack.class));
+        }).when(userEditPresenter).showDialog(eq((User) null), isA(MainPresenter.CallBack.class));
     }
 
     private void initEditCallBack() {
@@ -164,6 +174,6 @@ public class MainPresenterTest {
                 callBack.onUserChanged(user);
                 return null;
             }
-        }).when(dialogPresenter).showDialog(isA(User.class), isA(MainPresenter.CallBack.class));
+        }).when(userEditPresenter).showDialog(isA(User.class), isA(MainPresenter.CallBack.class));
     }
 }

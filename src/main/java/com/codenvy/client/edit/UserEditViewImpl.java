@@ -11,10 +11,10 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogView {
+public class UserEditViewImpl extends DialogBox implements UserEditView {
 
     @Singleton
-    interface EditUserInfoViewUiBinder extends UiBinder<Widget, UserEditDialogViewImpl> {
+    interface UserEditViewImplUiBinder extends UiBinder<Widget, UserEditViewImpl> {
     }
 
     private ActionDelegate delegate;
@@ -38,7 +38,7 @@ public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogV
     Button cancelButton;
 
     @Inject
-    public UserEditDialogViewImpl(EditUserInfoViewUiBinder ourUiBinder) {
+    public UserEditViewImpl(UserEditViewImplUiBinder ourUiBinder) {
         setWidget(ourUiBinder.createAndBindUi(this));
 
         this.setAnimationEnabled(true);
@@ -91,7 +91,7 @@ public class UserEditDialogViewImpl extends DialogBox implements UserEditDialogV
 
     }
 
-    public void closeDialogBox() {
+    public void closeDialog() {
         this.hide();
     }
 

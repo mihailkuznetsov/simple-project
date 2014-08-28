@@ -2,12 +2,13 @@ package com.codenvy.client.main;
 
 import com.codenvy.client.ResourceBundle;
 import com.codenvy.client.SimpleProjectMessages;
-import com.codenvy.client.edit.UserEditDialogPresenter;
+import com.codenvy.client.edit.UserEditPresenter;
 import com.codenvy.client.events.ChangeToEnglishEvent;
 import com.codenvy.client.events.ChangeToEnglishEventHandler;
 import com.codenvy.client.events.ChangeToRussianEvent;
 import com.codenvy.client.events.ChangeToRussianEventHandler;
 import com.codenvy.client.model.User;
+import com.codenvy.client.status.UserStatusPresenter;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
@@ -21,7 +22,9 @@ public class MainPresenter implements MainView.ActionDelegate {
 
     private final MainView view;
 
-    private final UserEditDialogPresenter dialogPresenter;
+    private final UserEditPresenter userEditPresenter;
+
+    private final UserStatusPresenter userStatusPresenter;
 
     private final EventBus eventBus;
 
@@ -36,21 +39,25 @@ public class MainPresenter implements MainView.ActionDelegate {
     private final CallBack editCallBack;
 
     @Inject
-    public MainPresenter(MainView mainView, UserEditDialogPresenter userEditDialogPresenter, EventBus eventBus, final SimpleProjectMessages messages) {
+    public MainPresenter(MainView mainView,
+                         UserEditPresenter userEditPresenter,
+                         UserStatusPresenter userStatusPresenter,
+                         EventBus eventBus,
+                         final SimpleProjectMessages messages) {
         this.view = mainView;
         this.view.setDelegate(this);
 
-        this.dialogPresenter = userEditDialogPresenter;
-
+        this.userEditPresenter = userEditPresenter;
+        this.userStatusPresenter = userStatusPresenter;
         this.eventBus = eventBus;
         eventBus.addHandler(ChangeToEnglishEvent.TYPE, new ChangeToEnglishEventHandler() {
             public void onChangeToEnglish(ChangeToEnglishEvent event) {
-                view.setInfoText(ResourceBundle.IMPL.info_en().getText());
+                view.setDecriptionText(ResourceBundle.IMPL.info_en().getText());
             }
         });
         eventBus.addHandler(ChangeToRussianEvent.TYPE, new ChangeToRussianEventHandler() {
             public void onChangeToRussian(ChangeToRussianEvent event) {
-                view.setInfoText(ResourceBundle.IMPL.info_ru().getText());
+                view.setDecriptionText(ResourceBundle.IMPL.info_ru().getText());
             }
         });
 
@@ -68,6 +75,7 @@ public class MainPresenter implements MainView.ActionDelegate {
                 view.setUserAmountLabel(messages.userAmount(users.size()));
                 view.setEditButtonEnabled(false);
                 view.setDeleteButtonEnabled(false);
+                view.setStatusButtonEnabled(false);
             }
         };
 
@@ -78,16 +86,17 @@ public class MainPresenter implements MainView.ActionDelegate {
 
                 view.setEditButtonEnabled(false);
                 view.setDeleteButtonEnabled(false);
+                view.setStatusButtonEnabled(false);
             }
         };
     }
 
     public void onAddButtonClicked() {
-        dialogPresenter.showDialog(null, addCallBack);
+        userEditPresenter.showDialog(null, addCallBack);
     }
 
     public void onEditButtonClicked() {
-        dialogPresenter.showDialog(lastSelectedUser, editCallBack);
+        userEditPresenter.showDialog(lastSelectedUser, editCallBack);
     }
 
     public void onDeleteButtonClicked() {
@@ -98,6 +107,10 @@ public class MainPresenter implements MainView.ActionDelegate {
 
         view.setEditButtonEnabled(false);
         view.setDeleteButtonEnabled(false);
+    }
+
+    public void onStatusButtonClicked() {
+        userStatusPresenter.showDialog(lastSelectedUser);
     }
 
     public void onEnglishButtonClicked() {
@@ -111,6 +124,7 @@ public class MainPresenter implements MainView.ActionDelegate {
     public void onUserSelected(User lastSelectedUser) {
         view.setEditButtonEnabled(true);
         view.setDeleteButtonEnabled(true);
+        view.setStatusButtonEnabled(true);
 
         this.lastSelectedUser = lastSelectedUser;
     }

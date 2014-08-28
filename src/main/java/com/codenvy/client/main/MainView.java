@@ -17,6 +17,8 @@ public interface MainView extends IsWidget {
 
         void onDeleteButtonClicked();
 
+        void onStatusButtonClicked();
+
         void onEnglishButtonClicked();
 
         void onRussianButtonClicked();
@@ -24,7 +26,7 @@ public interface MainView extends IsWidget {
 
     void setDelegate(ActionDelegate delegate);
 
-    void setInfoText(String text);
+    void setDecriptionText(String text);
 
     void setUsers(List<User> users);
 
@@ -33,4 +35,6 @@ public interface MainView extends IsWidget {
     void setEditButtonEnabled(boolean enabled);
 
     void setDeleteButtonEnabled(boolean enabled);
+
+    void setStatusButtonEnabled(boolean enabled);
 }

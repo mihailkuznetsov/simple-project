@@ -23,7 +23,7 @@ import java.util.List;
 public class MainViewImpl extends Composite implements MainView {
 
     @Singleton
-    interface MyViewImplUiBinder extends UiBinder<DockLayoutPanel, MainViewImpl> {
+    interface MainViewImplUiBinder extends UiBinder<DockLayoutPanel, MainViewImpl> {
     }
 
     private final SimpleProjectMessages messages;
@@ -39,6 +39,9 @@ public class MainViewImpl extends Composite implements MainView {
     @UiField
     Button deleteButton;
 
+    @UiField
+    Button statusButton;
+
     @UiField(provided = true)
     CellTable<User> table;
 
@@ -49,13 +52,13 @@ public class MainViewImpl extends Composite implements MainView {
     Button russianButton;
 
     @UiField
-    Label info;
+    Label description;
 
     @UiField
     Label userAmountLabel;
 
     @Inject
-    public MainViewImpl(MyViewImplUiBinder ourUiBinder, SimpleProjectMessages messages) {
+    public MainViewImpl(MainViewImplUiBinder ourUiBinder, SimpleProjectMessages messages) {
         this.messages = messages;
         initCellTable();
         initWidget(ourUiBinder.createAndBindUi(this));
@@ -108,8 +111,8 @@ public class MainViewImpl extends Composite implements MainView {
         this.delegate = delegate;
     }
 
-    public void setInfoText(String text) {
-        info.setText(text);
+    public void setDecriptionText(String text) {
+        description.setText(text);
     }
 
 
@@ -129,6 +132,11 @@ public class MainViewImpl extends Composite implements MainView {
         deleteButton.setEnabled(enabled);
     }
 
+    @Override
+    public void setStatusButtonEnabled(boolean enabled) {
+        statusButton.setEnabled(enabled);
+    }
+
     @UiHandler("addButton")
     public void onAddButtonClicked(ClickEvent event) {
         delegate.onAddButtonClicked();
@@ -142,6 +150,11 @@ public class MainViewImpl extends Composite implements MainView {
     @UiHandler("deleteButton")
     public void onDeleteButtonClicked(ClickEvent event) {
         delegate.onDeleteButtonClicked();
+    }
+
+    @UiHandler("statusButton")
+    public void onStatusButtonClicked(ClickEvent event) {
+        delegate.onStatusButtonClicked();
     }
 
     @UiHandler("englishButton")
