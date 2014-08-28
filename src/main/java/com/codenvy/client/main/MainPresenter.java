@@ -107,6 +107,8 @@ public class MainPresenter implements MainView.ActionDelegate {
 
         view.setEditButtonEnabled(false);
         view.setDeleteButtonEnabled(false);
+        view.setStatusButtonEnabled(false);
+
     }
 
     public void onStatusButtonClicked() {

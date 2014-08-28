@@ -76,6 +76,8 @@ public class MainPresenterTest {
 
         verify(view).setEditButtonEnabled(false);
         verify(view).setDeleteButtonEnabled(false);
+        verify(view).setStatusButtonEnabled(false);
+
     }
 
     @Test
@@ -96,6 +98,8 @@ public class MainPresenterTest {
 
         verify(view).setEditButtonEnabled(false);
         verify(view).setDeleteButtonEnabled(false);
+        verify(view).setStatusButtonEnabled(false);
+
     }
 
     @Test
@@ -124,6 +128,8 @@ public class MainPresenterTest {
 
         verify(view).setEditButtonEnabled(false);
         verify(view).setDeleteButtonEnabled(false);
+        verify(view).setStatusButtonEnabled(false);
+
     }
 
     @Test
@@ -139,6 +145,7 @@ public class MainPresenterTest {
 
         verify(view).setEditButtonEnabled(true);
         verify(view).setDeleteButtonEnabled(true);
+        verify(view).setStatusButtonEnabled(true);
     }
 
     @Test
