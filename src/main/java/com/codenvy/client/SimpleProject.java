@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class SimpleProjectEntryPoint implements EntryPoint {
+public class SimpleProject implements EntryPoint {
 
     public void onModuleLoad() {
         SimpleProjectGinjector injector = GWT.create(SimpleProjectGinjector.class);

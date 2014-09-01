@@ -3,18 +3,23 @@ package com.codenvy.client.edit;
 import com.codenvy.client.SimpleProjectMessages;
 import com.codenvy.client.main.MainPresenter;
 import com.codenvy.client.model.User;
+import com.google.gwt.user.client.Window;
+import com.googlecode.gwt.test.GwtModule;
+import com.googlecode.gwt.test.GwtTestWithMockito;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
+import static junitparams.JUnitParamsRunner.$;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class UserEditPresenterTest {
+@GwtModule("com.codenvy.SimpleProject")
+public class UserEditPresenterTest extends GwtTestWithMockito {
     private static final String ADD_DIALOG_TITLE = "ADD_TITLE";
     private static final String EDIT_DIALOG_TITLE = "EDIT_TITLE";
 
@@ -98,6 +103,47 @@ public class UserEditPresenterTest {
         assertEquals("4", newUser.getAddress());
 
         verify(view).closeDialog();
+    }
+
+    @Test
+    @Parameters({
+            ",,,",
+            ",,,filled",
+            ",,filled,",
+            ",,filled,filled",
+
+            ",filled,,",
+            ",filled,,filled",
+            ",filled,filled,",
+            ",filled,filled,filled",
+
+            "filled,,,",
+            "filled,,,filled",
+            "filled,,filled,",
+            "filled,,filled,filled",
+
+            "filled,filled,,",
+            "filled,filled,,filled",
+            "filled,filled,filled,",})
+    public void testOkClickedWhenUserHasEmptyFields(String firstName,
+                                                    String lastName,
+                                                    String age,
+                                                    String address) {
+        when(view.getFirstName()).thenReturn(firstName);
+        when(view.getLastName()).thenReturn(lastName);
+        when(view.getAge()).thenReturn(age);
+        when(view.getAddress()).thenReturn(address);
+
+        presenter.showDialog(user, callBack);
+        presenter.onOkButtonClicked();
+
+        verify(view).getFirstName();
+        verify(view).getLastName();
+        verify(view).getAge();
+        verify(view).getAddress();
+
+        verify(callBack, never()).onUserChanged((User) anyObject());
+        verify(view, never()).closeDialog();
     }
 
     @Test

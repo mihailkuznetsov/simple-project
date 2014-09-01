@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -34,7 +35,7 @@ public class UserStatusPresenterTest {
         presenter.showDialog(user);
         presenter.onOkButtonClicked();
 
-        verify(user).setStatus(USER_STATUS_TEXT);
+        verify(user).setStatus(eq(USER_STATUS_TEXT));
         verify(view).getUserStatusText();
         verify(view).closeDialog();
     }
@@ -52,7 +53,7 @@ public class UserStatusPresenterTest {
 
         presenter.showDialog(user);
 
-        verify(view).setUserInfo(FULL_INFO);
+        verify(view).setUserInfo(eq(FULL_INFO));
         verify(user).getFullInfo();
 
         verify(view).setUserStatusText(user.getStatus());

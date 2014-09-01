@@ -15,7 +15,7 @@
   <inherits name="com.google.gwt.inject.Inject"/>
 
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='com.codenvy.client.SimpleProjectEntryPoint' />
+  <entry-point class='com.codenvy.client.SimpleProject' />
 
   <!-- Enable Super Dev Mode support.                             -->
   <add-linker name='xsiframe'/>

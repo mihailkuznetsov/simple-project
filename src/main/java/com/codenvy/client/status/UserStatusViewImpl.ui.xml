@@ -7,7 +7,7 @@
     <ui:style>
         .dialogBox {
             width: 250px;
-            height: 150px;
+            height: 180px;
         }
 
         .textArea {
@@ -22,6 +22,8 @@
         <g:Label ui:field="userInfo"/>
 
         <g:TextArea ui:field="statusText" addStyleNames="{style.textArea}"/>
+
+        <g:Label text="{msg.statusNote}"/>
 
         <g:FlowPanel addStyleNames="{res.css.dialogButtonPanel}">
             <g:Button text="{msg.ok}" ui:field="okButton" addStyleNames="{res.css.dialogButton}"/>

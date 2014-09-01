@@ -40,4 +40,6 @@ public interface SimpleProjectMessages extends Messages {
     String currentUser();
 
     String statusDialogTitle();
+
+    String statusNote();
 }

@@ -3,6 +3,7 @@ package com.codenvy.client.edit;
 import com.codenvy.client.SimpleProjectMessages;
 import com.codenvy.client.main.MainPresenter;
 import com.codenvy.client.model.User;
+import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 
 public class UserEditPresenter implements UserEditView.ActionDelegate {
@@ -27,7 +28,7 @@ public class UserEditPresenter implements UserEditView.ActionDelegate {
         String address = view.getAddress();
 
         if (firstName.isEmpty() || (lastName.isEmpty()) || (age.isEmpty()) || address.isEmpty()) {
-//            Window.alert(messages.emptyUserDataErrorMessage());
+            Window.alert(messages.emptyUserDataErrorMessage());
         } else {
             callBack.onUserChanged(new User(firstName, lastName,
                     age, address));

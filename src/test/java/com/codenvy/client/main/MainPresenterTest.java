@@ -7,14 +7,18 @@ import com.codenvy.client.events.ChangeToRussianEvent;
 import com.codenvy.client.model.User;
 import com.codenvy.client.status.UserStatusPresenter;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.gwt.test.GwtModule;
+import com.googlecode.gwt.test.GwtTestWithMockito;
+import com.googlecode.gwt.test.gin.GInjectorCreateHandler;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import java.util.List;
@@ -25,8 +29,8 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class MainPresenterTest {
+@GwtModule("com.codenvy.SimpleProject")
+public class MainPresenterTest extends GwtTestWithMockito {
 
     private static final String USER_AMOUNT = "USER_AMOUNT";
 
@@ -56,6 +60,10 @@ public class MainPresenterTest {
     @InjectMocks
     private MainPresenter presenter;
 
+    @Before
+    public void setUp() {
+        addGwtCreateHandler(new GInjectorCreateHandler());
+    }
 
     @Test
     public void testAddButtonClickedWithCallBack() {
@@ -77,7 +85,6 @@ public class MainPresenterTest {
         verify(view).setEditButtonEnabled(false);
         verify(view).setDeleteButtonEnabled(false);
         verify(view).setStatusButtonEnabled(false);
-
     }
 
     @Test
@@ -99,7 +106,6 @@ public class MainPresenterTest {
         verify(view).setEditButtonEnabled(false);
         verify(view).setDeleteButtonEnabled(false);
         verify(view).setStatusButtonEnabled(false);
-
     }
 
     @Test
@@ -129,7 +135,6 @@ public class MainPresenterTest {
         verify(view).setEditButtonEnabled(false);
         verify(view).setDeleteButtonEnabled(false);
         verify(view).setStatusButtonEnabled(false);
-
     }
 
     @Test
@@ -165,7 +170,15 @@ public class MainPresenterTest {
 
     @Test
     public void testGo() {
-        //TODO
+        Widget widget = mock(Widget.class);
+        when(view.asWidget()).thenReturn(widget);
+        HasWidgets panel = mock(HasWidgets.class);
+
+        presenter.go(panel);
+
+        verify(panel).clear();
+        verify(panel).add(eq(widget));
+        verify(view).asWidget();
     }
 
     private void initAddCallBack() {
